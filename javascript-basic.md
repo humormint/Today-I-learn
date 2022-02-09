@@ -80,7 +80,7 @@ document.getElementById('alert').style.display = 'block';
 ```jsx
 <body>
     <div class="alert-box" id="alert">Alert 박스</div>
-    **<button onclick="알림창열기()">버튼</button>**
+    <button onclick="알림창열기()">버튼</button>
     <button onclick="document.getElementById('alert').style.display = 'none';">
       닫기
     </button>
