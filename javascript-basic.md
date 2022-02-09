@@ -40,14 +40,12 @@ document.getElementById("hello").??? = "???";
 ```html
 <body>
     <div class="alert-box" id="alert">Alert 박스</div>
-    **<button onclick="document.getElementById('alert').style.display = 'block';">**
+    <button onclick="document.getElementById('alert').style.display = 'block';">
       버튼
     </button>
     <script></script>
   </body>
 ```
-
-![스크린샷 2022-02-08 오후 12.40.57.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fa0d778a-9649-4812-a846-dad7fba3bdc1/스크린샷_2022-02-08_오후_12.40.57.png)
 
 → 버튼을 누르면 Alert 박스 창이 나오도록
 
