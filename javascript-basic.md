@@ -8,7 +8,7 @@ HTML 조작과 변경을 위해서
 <body>
     <h2 id="hello">안녕하세요</h2>
     <script>
-      **document.getElementById("hello").innerHTML = "안녕";** 
+      document.getElementById("hello").innerHTML = "안녕";
     </script>
   </body>
 ```
