@@ -229,7 +229,7 @@ but jQuery 없느 웹사이트 없어서 안배울 수는 없음
 
 `<script src="아까 다운받은 그 파일 경로"></script>`
 
-1. CDN
+2. CDN
 
 ```jsx
 <script
