@@ -202,7 +202,6 @@ document.getElementById('close').addEventListener('click', function(){
 
 `close` 요소가 클릭되면 코드실행해 주세요 → JS 안쓰고 기능개발
 
-![스크린샷 2022-02-08 오후 8.39.54.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5db1e2e1-6a7b-495a-949f-9cc3441199b4/스크린샷_2022-02-08_오후_8.39.54.png)
 
 ### Event
 
