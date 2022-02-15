@@ -624,3 +624,172 @@ ES6 문법
   여러 개 적용 할 때 콤마(,) 사용
   `jQuery animate({CSS속성}, 숫자)` → 숫자에 걸쳐서 애니매이션 실행 ex) 5000일 경우, 5초에 걸쳐 실행!
   showMenu 버튼을 누르면 저 메뉴가 왼쪽에서 슬그머니 등장
+
+## 위에서부터 등장하는 모달창 만들기
+
+애니메이션 만드는 방법
+
+1. 시작화면/최종화면 만들기
+2. 자바스크립트로 트리거 하기
+3. 스무스한 동작은 animate 함수 잘 안쓰고 CSS 속성 씀 (더 빨라서)
+
+→ transition 이용!
+
+→ 트리거는 자바스크립트로 하고 스무스한 동작은 transition으로!
+
+```jsx
+".btn-lg".on("click", function () {
+  $(".black-background").fadeIn();
+});
+```
+
+→
+
+```jsx
+$(".btn-lg").on("click", function () {
+  $(".black-background").show();
+  $(".black-background").animate({ marginTop: "0px" }); //최종화면
+});
+```
+
+```css
+.black-background {
+    background: rgba(0,0,0,0.5);
+    position: fixed; /* 브라우저 화면에 딱 달라붙음 */
+    z-index: 5; /* 부트스트랩은 1 ~ 4까지 이용하므로 모든요소 앞에 위치 */
+    width: 100%;
+    height: 100%;
+    **display: block; /* 모달창이 보여야 하니까 none 대신 block */
+    margin-top: -1200px; /* 위에 있다가 내려오도록 */**
+}
+```
+
+→
+
+```jsx
+$('.btn-lg').on('click', function() {
+      $('.black-background')**.show().animate**({marginTop : '0px'});
+    });
+```
+
+→ `show()` 와 `animate` 겹쳐서 사용할 수 있음!
+
+요즘은 animate 대신 CSS 주로 이용함!
+
+```jsx
+$('.btn-lg').on('click', function() {
+      $('.black-background').**css('margin-top', '0px'**); /* margin-top을 0px로*/
+    });
+```
+
+```css
+.black-background {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed; /* 브라우저 화면에 딱 달라붙음 */
+  z-index: 5; /* 부트스트랩은 1 ~ 4까지 이용하므로 모든요소 앞에 위치 */
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: all 3s;
+  margin-top: -1000px;
+}
+```
+
+프로의 애니메이션 개발 팁
+
+margin width position left right heght 애니메이션 금지 (건드리지 않는 것이 좋음!)
+
+→ 동작시간이 오래걸릴 수 있음 → transform 이용!
+
+→ margin 대신 transform 사용!
+
+```jsx
+$(".btn-lg").on("click", function () {
+  $(".black-background").css("transform", "translateY(0px)"); // 0px이 최종 모습
+});
+```
+
+```css
+.black-background {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed; /* 브라우저 화면에 딱 달라붙음 */
+  z-index: 5; /* 부트스트랩은 1 ~ 4까지 이용하므로 모든요소 앞에 위치 */
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: all 3s;
+  transform: translateY(-1000px); /* margin-top 대신 쓰는게 훨씬 좋음 */
+}
+```
+
+가장 좋은 방법
+
+→ CSS class를 부착하는 방향으로 시작화면/최종화면 개발
+
+`$('.black-background').css('transform', 'translateY(0px)');` 대신, `addClass()` 함수 사용하는 것이 더 좋음!
+
+```jsx
+$(".btn-lg").on("click", function () {
+  $(".black-background").addClass();
+});
+```
+
+```css
+.slide-down {
+  transform: translateY(0px);
+}
+```
+
+## 정규식으로 이메일 형식 검증해보기
+
+→ 문자를 검사할때 쓰는 정규식(슬래시 2개로 표현)
+
+`/asadqwd/` → 이 문자에 a나 b가 들어가 있나요??
+
+정규식으로 문자를 검사하는 법
+
+`/abc/.test('abcadasdw')` → 지금 `'abcadasdw'` 문자에 abc라는 글자가 있나요??
+
+### 정규식 핵심 문법
+
+`[괄호]` → 알파벳을 표현하고 싶을때 사용함
+
+ex)
+
+`/[A-z]/.test(’s’)` → 대문자 A부터 소문자 z까지(모든 알파벳) 중 `‘s’`가 있냐?
+
+→ `true`
+
+\S : 특수문자 포함 모든 문자 1개
+
+ex)
+
+`/\S/.test('#')`
+
+→ `true`
+
+이메일을 표현하는 정규식
+
+→ asdasda@dadasd.asdasd
+
+`/\S@\S.\S/` → 모는문자@모든문자.모든문자
+
+\S → 모든 문자이긴 한데 문자 하나를 뜻함
+
+→ `\S+` → 모든 문자 하나 뒤에도 계속 찾기
+
+→`/\S+@\S+\.\S+/` → . 은 따로 구분 해줘야함!
+
+→ `/\S+@\S+\.\S+/.test('dasasd@naver.com')` → `true`
+
+### 이메일 input의 값이 이메일 형식이 아니면 폼 전송 X
+
+만약 지금 이메일 input에 입력된 값이 정규식과 비교했을때 false인 경우
+
+폼 전송 막기, 안내창 띄우기
+
+숙제 1 → 제대로된 이메일 정규식 찾아오기
+
+숙제2 → 패스워드 입력란에 대문자 들어 있는지 검사
+
+숙제 3 → 이메일 input 공백검사와 이메일 형식 검사 둘 다 하려면??
