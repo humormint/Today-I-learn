@@ -839,3 +839,117 @@ if (/\S+@\S+\.\S+/.test(입력한이메일) == false) {
 - 버튼을 누르면 다음 화면으로 넘어가는 슬라이드
 
 `100vw` → viewport width : 실제 브라우저 화면의 몇 %를 차지할지
+
+```css
+.slide-container {
+  width: 300vw;
+}
+.slide-box img {
+  width: 100%;
+}
+```
+
+2라는 버튼을 누르면 다음 사진 보이도록
+
+→ 이미지 3개를 감싸는 큰 div 박스를 왼쪽으로 100vw만큼 움직이도록!
+
+→ 버튼 2를 투르면 해당 CSS 속성 보여주기
+
+```css
+.slide-container {
+  width: 300vw;
+  transform: translateX(-100vw);
+}
+```
+
+애니메이션 구현하는 법
+
+1. jQuery animate()
+2. CSS transition → `transition: all 1s;`
+
+자바스크립트 trigger만 만들면 됨
+
+버튼2 누르면 `transform: translateX(-100vw);` 가 되어야 함!
+
+```jsx
+$(".slide-2").click(function () {
+  $(".slide-container").css("transform", "translateX(-100vw");
+});
+```
+
+UI 만드는 법
+
+1. 시작화면 만들기
+2. 최종화면 만들기
+3. 자바스크립트 Trigger
+4. 애니메이션 넣기
+
+버튼 3을 누르면 ?
+
+→ 3번째 사진이 보이도록 → -200vw만큼 움직이도록 만들기
+
+```jsx
+$(".slide-3").click(function () {
+  $(".slide-container").css("transform", "translateX(-200vw");
+});
+```
+
+→ 버그 생길 수 있음
+
+페이지 늘이거나 줄였을 때 반응이 느림 → 이미지를 백그라운드 이미지 속성으로 넣으면 됨
+
+→ `background-image: url()`
+
+`transition: all 1s;` 를 → `transition: transform 1s;` 로 변경하면 width 는 변경하지 않고 transform 속성만 변함 !
+
+숙제 → Next버튼 만들기 → 누르면 다음이미지로 넘어가기
+
+`position: absolute;*/* 요소 겹치거나 띄우기 */` →\* 쓰려면 부모 태그에 position relative가 필요함!
+
+만약에 지금 사진1이 보이면 사진2를 보여주고
+
+사진 2가 보이면 사진 3을 보여주고
+
+```css
+.slide-next {
+position: absolute; */* 요소 겹치거나 띄우기 */*
+
+top: 45%;
+
+right: 0; */* 오른쪽으로 오게 */*
+
+}
+```
+
+```jsx
+var 지금보이는사진 = 1;
+$(".slide-next").click(function () {
+  if (지금보이는사진 == 1) {
+    $(".slide-container").css("transform", "translateX(-100vw");
+    지금보이는사진 = 2; // 지금 보이는 사진이 2라고 알려줘야 함!
+  } else if (지금보이는사진 == 2) {
+    $(".slide-container").css("transform", "translateX(-200vw");
+    지금보이는사진 = 3;
+  }
+});
+```
+
+### 확장성있는 코드로 다시 개발(사진이 무수히 많아지면 그 때마다 if문을 사용할 수는 없음)
+
+`-100vw`, `-200vw` 대신, `-지금보이는사진00vw`
+
+텍스트 더하기 → ‘글자' + ‘글자’ = ‘글자글자’
+
+```jsx
+var 지금보이는사진 = 1;
+    $('.slide-next'). click(function() {
+
+    **$('.slide-container').css('transform', 'translateX(-'+ 지금보이는사진 +'00vw)');
+    지금보이는사진 = 지금보이는사진 + 1;**
+```
+
+→ if문 필요없이 작성이 가능!
+
+→ Next 버튼이 끝없이 동작중
+
+지금 보이는 사진이 3이면 Next 버튼 기능제한
