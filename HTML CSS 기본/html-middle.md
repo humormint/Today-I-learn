@@ -317,9 +317,6 @@ media query 문법
 
 576px → 여기부터 모바일
 
-![스크린샷 2022-02-05 오후 6.01.58.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e2f0d9e9-f5ba-44e4-8ed2-8f642dbb49b7/스크린샷_2022-02-05_오후_6.01.58.png)
-
-![스크린샷 2022-02-05 오후 6.06.30.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/affcb6d5-6f2a-4d38-83e0-ed527d7ca54a/스크린샷_2022-02-05_오후_6.06.30.png)
 
 ```css
 .product-container div {
@@ -607,4 +604,3 @@ CSS만으로 만들 수 있는 트리거는 마우스 올렸을 때 이 정도�
 }
 ```
 
-![스크린샷 2022-02-07 오후 7.37.26.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d6988758-762b-455b-92eb-622679eada58/스크린샷_2022-02-07_오후_7.37.26.png)
