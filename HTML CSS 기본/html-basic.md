@@ -23,7 +23,6 @@ float: left → 요소를 붕 띄워서 왼쪽정렬
 
 -
 
-![스크린샷 2022-01-29 오후 9.47.03.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0bce2d6a-25eb-4ab8-bb85-0944594ab14f/스크린샷_2022-01-29_오후_9.47.03.png)
 
 → 박스 배치할 때 float 사용하면 유용함
 
@@ -31,7 +30,7 @@ float: left → 요소를 붕 띄워서 왼쪽정렬
 
 → 다음 div에 clear: both를 주면 해결할 수 있음
 
-![스크린샷 2022-01-29 오후 9.52.17.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b79bb561-ed06-4f61-acc0-8237ff494ed4/스크린샷_2022-01-29_오후_9.52.17.png)
+
 
 ```css
 .footer {
@@ -70,7 +69,7 @@ left와 right 공백없애면
 <div class="right"></div>
 ```
 
-![스크린샷 2022-01-29 오후 10.40.25.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d44bfc79-40c1-48d1-b051-93e80a3ebf07/스크린샷_2022-01-29_오후_10.40.25.png)
+
 
 → 가로로 정렬
 
@@ -118,7 +117,6 @@ section, footer도 비슷함!
 
 → navbar 안에 있는 모든 a태그 스타일링
 
-![스크린샷 2022-01-30 오후 4.35.07.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b129a2e6-0e1e-42af-872f-665d3442fc7f/스크린샷_2022-01-30_오후_4.35.07.png)
 
 ```css
 .main-background {
@@ -161,11 +159,9 @@ position: absolute;
 margin: auto;
 ```
 
-![스크린샷 2022-02-01 오후 5.54.11.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/edff97f5-2b9c-4040-ae4e-6dc43d242dd1/스크린샷_2022-02-01_오후_5.54.11.png)
 
 ## 반응형 width & box-sizing
 
-![스크린샷 2022-02-01 오후 6.30.49.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bf743e69-db3e-4e5c-a9ad-e92ff6d7d8d6/스크린샷_2022-02-01_오후_6.30.49.png)
 
 ```css
 .box {
@@ -254,7 +250,6 @@ th {
 
 → 테두리 만들기
 
-![스크린샷 2022-02-02 오후 2.42.48.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d266db87-17be-40e3-b42b-001f8df5856a/스크린샷_2022-02-02_오후_2.42.48.png)
 
 - <thead>, <tbody>
 
@@ -283,7 +278,6 @@ table {
 }
 ```
 
-![스크린샷 2022-02-02 오후 2.49.16.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/059a3eb7-41c9-4e32-8399-c8542ffdf79b/스크린샷_2022-02-02_오후_2.49.16.png)
 
 - 셀 안의 요소 상하 정렬
 
