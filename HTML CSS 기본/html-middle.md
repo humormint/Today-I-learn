@@ -107,7 +107,6 @@ display: flex 쓰면 박스 가로 배치가 쉬워짐
 
 →
 
-![스크린샷 2022-02-03 오후 6.39.51.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/80422d3e-b10e-4b0c-ae17-218fc1afc4bd/스크린샷_2022-02-03_오후_6.39.51.png)
 
 flex-grow → 박스 크기를 비율로 설정 가능!
 
@@ -381,7 +380,6 @@ padding-top: 25px;
 }
 ```
 
-![스크린샷 2022-02-07 오후 3.17.37.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ea66f374-c287-49db-be63-4b82315c3dcf/스크린샷_2022-02-07_오후_3.17.37.png)
 
 ## Transition 속성으로 CSS 애니매이션 구현하기
 
