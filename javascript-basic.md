@@ -953,3 +953,471 @@ var 지금보이는사진 = 1;
 → Next 버튼이 끝없이 동작중
 
 지금 보이는 사진이 3이면 Next 버튼 기능제한
+
+## 함수의 return 문법 & 소수점 다루기
+
+function 문법
+
+1. 긴코드 축약해서 쓸 수 있음
+2. 파라미터 추가 가능
+3. return → 함수 쓰고 그 자리에 뭔가 뱉고 싶을때 사용(반환)
+
+```jsx
+function 함수() {
+  return 123; // 함수쓰고 123을 뱉어라
+}
+var 변수 = 함수(); // 함수에 123 저장
+console.log(변수); //123
+```
+
+return은 함수 종료 기능도 가지고 있음 → return 밑에 있는 코드는 실행X
+
+return 용도 → 자료를 넣으면 다른 자료가 나오는 변환기 만들고 싶을때 사용
+
+ex) 가격이 60000원 일때 부가세 계산할 때
+
+상품이 1개 일때
+
+```jsx
+console.log(60000 * 0.1);
+```
+
+but 상품이 많아질때 → 부가세 계산기 만드는게 편리함
+
+```jsx
+console.log(vat(50000));
+
+function vat(a) {
+  return a * 0.1;
+}
+vat(50000);
+```
+
+자바스크립트에서 소수점과 같이 연산할 때 주의점
+
+→ 1.1 곱하니까 작은 오차가 발생함 why? 컴퓨터는 2진법으로 바꿔서 연산하기 때문에
+
+→ 정확한 연산을 하고 싶으면 라이브러리를 쓰던가 반올림하면 됨
+
+```jsx
+console.log(vat(55555)); // 61110.50
+
+function vat(a) {
+  var num = (a * 1.1).toFixed(2); // 2째자리 지 반올림
+  return parseInt(num); // 문자가 숫자로 바뀜
+}
+```
+
+`toFixed` 는 문자로 변환됨 → 버그 생길 수 있음 → 숫자연산이 숫자와 문자의 연산으로 인식됨
+
+`parseFloat` 또는 `parseInt` 사용
+
+## 스크롤 애니메이션
+
+→ 스크롤 시 변하는 Navbar 만들기
+
+→ 스크롤 내리면 로고의 폰트가 줄어드는 애니메이션
+
+스크롤 기반 애니메이션 → 나중에 용도가 많음!
+
+![https://codingapple.com/wp-content/uploads/2019/09/navanimation.gif](https://codingapple.com/wp-content/uploads/2019/09/navanimation.gif)
+
+→ jQuery 필요함
+
+navbar가 초기에 투명하다가 스크롤 내리면 검정색으로 변함
+
+UI 애니매이션 만드는 법
+
+1. 시작화면 제작 : 투명한 navbar
+2. 최종화면 제작
+3. 자바스크립트로 트리거
+
+4. 시작화면 제작 : 투명한 navbar
+
+```css
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    **background-color: transparent;
+    position: fixed;/* fixed를 줘야 스크롤 돼도 nav가 보임*/
+    z-inedx: 5;
+    width: 100%;
+}**
+```
+
+1. 스크롤바를 내리면 불투명 navbar
+
+`스크롤바를 내리면 .nav-menu이 background: black;`
+
+`window` → viewport
+
+```jsx
+/* 스크롤바를 내리면 
+      .nav-menu이 background: black; */
+
+$(window).on("scroll", function () {
+  $(".nav-menu").css("background", "black"); // 대신 클래스를 부착하는 addClass()를 쓰면 더 좋음
+}); // viewport가 scroll되었을 때 코드를 실행해 주세요
+```
+
+```html
+<div class="nav-menu nav-scroll"></div>
+```
+
+→ `nav-scroll` 이라는 새로운 class를 만듦(최종화면을 만들어 주는 class)
+
+```jsx
+$(window).on("scroll", function () {
+  $(".nav-menu").addClass("nav-scroll"); // 스크롤하면 nav-menu클래스에 nav-scroll클래스를 붙여 주세요
+}); // viewport가 scroll되었을 때 코드를 실행해 주세요
+```
+
+스크롤을 어느정도 내렸을 때 동작하게 하려면?
+
+but 우리는 스크롤 내리자마자 동작
+
+→ 스크롤 `요만큼` 내리면 동작하도록
+
+→ 스크롤바를 100px 내렸을 때 동작하게 하려면?
+
+→ 만약에 지금 스크롤을 100px 했을 때
+
+`$(window).scrollTop()` → 스크롤된 높이(px)를 알려주는 제이쿼리 함수
+
+```jsx
+$(window).on("scroll", function () {
+  if ($(window).scrollTop() > 100) {
+    // 만약에 지금 스크롤을 100px 했을 때
+    $(".nav-menu").addClass("nav-scroll"); // 스크롤하면 nav-menu클래스에 nav-scroll클래스를 붙여 주세요
+  }
+}); // viewport가 scroll되었을 때 코드를 실행해 주세요
+```
+
+숙제 1 : 스크롤 내리면 폰트사이즈 서서히 작아지게
+
+scroll 이벤트 리스너 많이쓰면 안됨 → 스크롤 내릴때마다 코드 실행해야 해서 버벅일 수 있음
+
+h1태그에 클래스 주기
+
+```jsx
+<div class="nav-menu">
+      <h1 **class="nav-logo"**>Shirts Studio</h1>
+      <a id="nav-sub-btn">Products</a>
+```
+
+최종화면에서 폰트사이즈 줄이기
+
+```css
+.scroll-nav-logo {
+  font-size: 30px;
+}
+.nav-menu h1 {
+  /* h1 태그에 적용해야 스크롤 올릴때도 애니메이션 적용됨*/
+  transition: all 1s;
+}
+```
+
+자바스크립트 트리거
+
+```jsx
+$(window).on('scroll', function() {
+        if ($(window).scrollTop() > 100) { // 만약에 지금 스크롤을 100px 했을 때
+      $('.nav-menu').addClass('nav-scroll') // 스크롤하면 nav-menu클래스에 nav-scroll클래스를 붙여 주세요
+      **$('.nav-menu h1').addClass('scroll-nav-logo')**  }
+    }) // viewport가 scroll되었을 때 코드를 실행해 주세요
+```
+
+숙제 2 : 다시 스크롤 올리면 원상태로! (애니메이션 제거)
+
+기존 작성했던 코드는
+
+스크롤바를 100px이상 내렸을 경우 애니메이션을 동작
+
+→ `else` 문을 사용해서 100px 미만일 경우 원상태로 되돌릴 코드를 추가
+
+## 탭 기능 만들기
+
+→ 탭의 html, css는 강의 하단에 첨부
+
+→ 탭으로 탭 기능 만들기
+
+→ 버튼 누르면 주황색 하이라이트 되도록 디자인 + 해당 탭의 내용이 보이도록
+
+UI 만드는법
+
+```css
+/* 강의 복사 내용*/
+ul.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #ccc;
+}
+ul.list::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.tab-button {
+  display: block;
+  padding: 10px 20px 10px 20px;
+  float: left;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  color: grey;
+  text-decoration: none;
+  cursor: pointer;
+}
+.active {
+  border-top: 2px solid orange;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid white;
+  border-left: 1px solid #ccc;
+  color: black;
+  margin-top: -2px;
+}
+.tab-content {
+  display: none;
+  padding: 10px;
+}
+.show {
+  display: block;
+}
+/* 강의 복사 내용*/
+```
+
+```html
+<div class="container mt-5">
+  <ul class="list">
+    <li class="tab-button">Products</li>
+    <li class="tab-button **active**">Information</li>
+    <li class="tab-button">Shipping</li>
+  </ul>
+
+  <div class="tab-content">
+    <p>상품설명입니다. Product</p>
+  </div>
+  <div class="tab-content **show**">
+    <p>상품정보입니다. Info</p>
+  </div>
+  <div class="tab-content">
+    <p>배송정보입니다. Shipping</p>
+  </div>
+</div>
+```
+
+→ `show` 클래스를 부착하면 원하는 내용을 보여줄 수 있도록! `active` 클래스를 부착하면 버튼을 주황색으로 표시할 수 있도록
+
+→ 첫번째 버튼을 누르면 첫번째 버튼 하이라이트 + 첫번째 내용 보여줄 수 있도록!
+
+→ javscript파일 첨부 → tab.js 파일 만들기
+
+`<script src="tab.js"></script>`
+
+버튼 0(products)을 누르면 ..
+
+1. 버튼0 버튼 1과 버튼2에 붙은 주황색 제거 (모든 탭 안보이게)
+2. 내용0 내용1 내용2 안보이게
+3. 버튼 0이 주황색으로 하이라이트 되어야함
+4. 내용0이 보여야함
+
+5. 다른 버튼에 붙은 주황색 제거하는 기능 추가해야함
+6. 다른 탭내용들 숨기는 기능도 추가해야함
+
+```jsx
+$(".tab-button")
+  .eq(0)
+  .click(function () {
+    $(".tab-button").removeClass("active"); // 모두 주황색 제거
+    $(".tab-content").removeClass("show"); // 모든 탭내용 제거
+    $(".tab-button").eq(0).addClass("active");
+    $(".tab-content").eq(0).addClass("show");
+  }); // tab 3개 중에 0번째 버튼만 선택!
+```
+
+## 탭 기능 만들기: for반복문으로 코드 줄이기
+
+우선, 버튼1, 버튼2도 똑같이 개발하기
+
+```jsx
+$(".tab-button")
+  .eq(1)
+  .click(function () {
+    $(".tab-button").removeClass("active");
+    $(".tab-content").removeClass("show");
+    $(".tab-button").eq(1).addClass("active");
+    $(".tab-content").eq(1).addClass("show");
+  });
+
+$(".tab-button")
+  .eq(2)
+  .click(function () {
+    $(".tab-button").removeClass("active");
+    $(".tab-content").removeClass("show");
+    $(".tab-button").eq(2).addClass("active");
+    $(".tab-content").eq(2).addClass("show");
+  });
+```
+
+`eq(0)` 을 각각 → `eq(1)` , `eq(2)` 로 변경
+
+→ 버튼1, 버튼2 기능 완성
+
+but 코드가 너무 길어짐 → 확장성 있는 코드로 바꿀 수 있음
+
+→ 반복문을 통해서
+
+```jsx
+**for (let i = 0; i < 3; i++) { // var 말고 let 써야함**
+  $(".tab-button")
+    .eq(i)
+    .click(function () {
+      $(".tab-button").removeClass("active");
+      $(".tab-content").removeClass("show");
+      // 1. 다른 버튼에 붙은 주황색 제거하는 기능 추가해야함
+      // 2. 다른 탭내용들 숨기는 기능도 추가해야함
+      $(".tab-button").eq(i).addClass("active");
+      $(".tab-content").eq(i).addClass("show");
+    }); // tab 3개 중에 0번째 버튼만 선택!
+**}**
+```
+
+`var` 대신 `let` 써야 함(존재 범위가 중괄호 내부) →
+
+`for (let i = 0; i < 3; i++)` 대신 `for (let i = 0; i < 버튼의 개수; i++)` 로 하면 더 확장성 있는 코드가 됨
+
+`버튼의 개수` 대신 `$('.tab-button').length` 입력
+
+## 이벤트 버블링과 이벤트 함수
+
+모달창에 배경을 누르면 모달창 닫히는 기능 추가
+
+이벤트 버블링 : 이벤트가 상위요소로 퍼지는 현상
+
+→ 이벤트리스너 달때 주의 해야함
+
+검은배경 누르면 모달창이 닫히는 기능
+
+```jsx
+$(".black-background").click(function () {
+  $(".black-background").hide(); // display:none과 유사함
+});
+```
+
+→ 모달창 내 다른 요소 눌러도 모달창이 닫히는 버그 발생
+
+`(".black-background")` 아래에 있는 요소 클릭해도 이벤트 버블링으로 `(".black-background")` 를 클릭했다고 브라우저가 인식함
+
+이벤트리스너 안에서 쓸 수 있는 이벤트 함수 → 함수안에 파라미터 쓸 수 있음 ex) `function(e)`
+
+```jsx
+$(".black-background").click(function(e) {
+        e.target; // 지금 실제로 클릭한 요소
+				e.currentTarget; // 지금 이벤트리스너가 달린 곳
+				$(this); // 지금 이벤트리스너가 달린 곳
+				e.preventDefault(); // 기본 동작 막기
+```
+
+→ 버그 해결하기
+
+```jsx
+$(".black-background").click(function(e) {
+       **if(e.target == e.currentTarget) {** **// 지금 실제로 클릭한게 검은배경일 때만**
+      $(".black-background").hide(); // display:none과 유사함
+       **}**
+      })
+```
+
+`e.currentTarget` 은 `$(".black-background")`와 같은 의미
+
+but, `e.currentTarget` 대신, `$(".black-background")` 사용하면 안됨
+
+why? → `[e.target](http://e.target)` 은 JS문법이고 `$(".black-background")` 은 jQuery 문법이기 때문에
+
+→ 이벤트 버블링으로 생기는 버그는 if, e.target등으로 대처가 가능하다
+
+## 이벤트 버블링 응용과 Dataset
+
+함수로 코드 깔끔하게 만들 수 있음
+
+```jsx
+for (let i = 0; i < $(".tab-button").length; i++) {
+  // var 말고 let 써야함
+  $(".tab-button")
+    .eq(i)
+    .click(function () {
+      탭열기(i);
+    }); // tab 3개 중에 0번째 버튼만 선택!
+}
+function 탭열기(숫자) {
+  $(".tab-button").removeClass("active");
+  $(".tab-content").removeClass("show");
+  // 1. 다른 버튼에 붙은 주황색 제거하는 기능 추가해야함
+  // 2. 다른 탭내용들 숨기는 기능도 추가해야함
+  $(".tab-button").eq(숫자).addClass("active");
+  $(".tab-content").eq(숫자).addClass("show");
+}
+```
+
+→ 함수 축약할 때 함수 안의 변수는 파라미터로 정의 해줌
+
+but 반복문 말고 다른 방법으로 탭기능 만들 수 있음
+
+이벤트리스너를 3개 사용하지 않고 탭의 상위 요소 1개에 써도 기능 구현이 가능함
+
+→ 이벤트 리스너를 적게 사용하면 메모리 절약이 가능함
+
+→ `<ul>` 에 이벤트리스너 달아서 탭기능 만들기
+
+```jsx
+$(".list").click(function (e) {
+  if (e.target == document.querySelectorAll(".tab-button")[0]) {
+    // 제이쿼리 $와 유사한 셀렉터 사용 가능, 여러개 있을 때 All
+    // 0번째 타겟이 내가 클릭한것과 같은지
+    탭열기(0); // 함수 숫자에 0이 기입되어 동작
+  }
+});
+```
+
+→ if문을 3개 써야해서 비효율적일 수도 있음
+
+HTML에 몰래 정보심기 (일종의 테크닉)
+
+`data-작명=”값”`
+
+```html
+<ul class="list">
+  <li class="tab-button" **data-id="0" **>Products</li>
+  <li class="tab-button active" **data-id="1" **>Information</li>
+  <li class="tab-button" **data-id="2" **>Shipping</li>
+</ul>
+```
+
+정보 꺼내려면
+
+HTML요소.dataset.작명
+
+→ if문 없이도 기능 구현 가능
+
+```jsx
+$(".list").click(function (e) {
+  **탭열기(e.target.dataset.id)**; //(내가누른버튼에 숨겨져있던 숫자) 0버튼 누르면 0이됨
+});
+function 탭열기(숫자) {
+  $(".tab-button").removeClass("active");
+  $(".tab-content").removeClass("show");
+  // 1. 다른 버튼에 붙은 주황색 제거하는 기능 추가해야함
+  // 2. 다른 탭내용들 숨기는 기능도 추가해야함
+  $(".tab-button").eq(숫자).addClass("active");
+  $(".tab-content").eq(숫자).addClass("show");
+}
+```
+
+jQuery 문법으로 HTML에 몰래 정보저장하기
+
+`$(’.list’).data(’작명’, ‘값’);`
+
+`$(’.list’).data(’작명’);` → 저장한 정보 가져다 쓸 수 있음
+
+호환성은 jQuery를 이용한 정보저장이 더 좋음!
