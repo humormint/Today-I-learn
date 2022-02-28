@@ -1421,3 +1421,231 @@ jQuery 문법으로 HTML에 몰래 정보저장하기
 `$(’.list’).data(’작명’);` → 저장한 정보 가져다 쓸 수 있음
 
 호환성은 jQuery를 이용한 정보저장이 더 좋음!
+
+## 인터렉티브 form 만들기 : input과 change 이벤트
+
+다이나믹한 from UI 만들기
+
+→ 부트스트랩 템플릿, jQuery 설치할 것
+
+```html
+<form class="container my-5">
+  <div class="form-group">
+    <p>상품선택</p>
+    <select class="form-control" id="option1">
+      <option>모자</option>
+      <option>셔츠</option>
+    </select>
+
+    <div class="size-select">
+      <p class="mt-4">사이즈선택</p>
+      <select class="form-control" id="option2">
+        <option>95</option>
+        <option>100</option>
+        <option>105</option>
+      </select>
+    </div>
+  </div>
+</form>
+```
+
+→ 셔츠를 고르면 셔츠 사이즈를 고르는 셀렉트 폼 보여주기
+
+`<select>` → input과 유사함, 안에 `<option>` 태그 추가하면 여러가지 옵션이 보임
+
+→ `size-select` 클래스는 셔츠 선택될 때 보여야 하니까 `display: none;` 으로 설정하기
+
+→ input 값이 바뀔때마다 이벤트가 발동!
+
+input 이벤트 : input 값이 바뀔때마다 발동(input에 값을 입력하기만 해도 발동)
+
+change 이벤트 : input 값이 바뀔 때 발생 but input 값이 바뀌고 커서를 다른 곳에 찍어야 발생!
+
+`$('select').val()` → select에 입력한 값 가져올 수 있음
+
+ex) input창에 모자 선택하고 `$('#option').val()` → `'모자'` 출력
+
+사용자가 ‘셔츠’ 선택하면 UI 보여주기
+
+```jsx
+$("#option1").on("change", function () {
+  // select 인풋에서 셔츠라는 값을 선택하면 밑에 그 UI를 보여줌
+  if ($("select").val() == "셔츠") {
+    // 만약 사용자가 선택한 값이 셔츠인 경우 밑에 그 UI를 보여줌
+    // if (사용자가 선택한 겂 == 셔츠) {
+    $(".size-select").show(); //    그 UI를 보여줌
+  }
+});
+```
+
+→ 모자를 고르면 셔츠 사이즈를 고르는 select 폼 숨기기
+
+```jsx
+$('#option1').on('change', function(){  // select 인풋에서 셔츠라는 값을 선택하면 밑에 그 UI를 보여줌
+        if ($('select').val() == '셔츠') { // 만약 사용자가 선택한 값이 셔츠인 경우 밑에 그 UI를 보여줌
+        // if (사용자가 선택한 겂 == 셔츠) {
+        $('.size-select').show();//    그 UI를 보여줌
+        } **else { $('.size-select').hide(); // 모자를 선택하면 UI 숨겨줌**
+
+        **}**
+    })
+```
+
+## 인터렉티브 form 만들기 : HTML을 동적으로 생성하기
+
+바지를 선택하면 다른 `<option>` 이 나오도록
+
+HTML을 자바스크립트로 짜서넣기
+
+→ 셔츠를 선택하면 `<option>` 세 개를 만들어서 집어 넣도록!
+
+자바스크립트로 HTML 작성하기 : 문자 자료형 안에 담으면 됨
+
+`append()` → 특정 HTML을 안에 넣어주는 jquery문법
+
+`$('#option2').append('<div></div>');` → option2라는 id에 `<div></div>` 태그 추가
+
+→ 변수에 담아서 동적으로 생성도 가능
+
+```jsx
+$("#option1").on("change", function () {
+  if ($("#option1").val() == "셔츠") {
+    // 템플릿을 만들고
+    var 템플릿 = "<div></div>";
+    $("#option2").append(템플릿);
+  }
+});
+```
+
+셔츠를 선택하면 `<option>` 세 개를 만들어서 집어넣음
+
+```jsx
+$("#option1").on("change", function () {
+  if ($("#option1").val() == "셔츠") {
+    // 템플릿을 만들고
+    var 템플릿 = "<option>95</option><option>100</option><option>105</option>";
+    $("#option2").append(템플릿);
+  }
+});
+```
+
+```css
+.size-select {
+  display: block;
+}
+```
+
+→ `display: none;` 에서 `display: block;` 으로 교체
+
+html에서 `'따옴표'` 는 엔터기가 적용안됨 → 여백인정X
+
+→ `백틱` → 엔터키 적용됨!
+
+```jsx
+var 템플릿 = `<option>95</option>
+        <option>100</option>
+        <option>105</option>`;
+```
+
+바지 선택하면 바지 사이즈 태그 추가되는 기능 만들기
+
+```jsx
+$('#option1').on('change', function() {
+          if( $('#option1').val() == '셔츠') { // 템플릿을 만들고
+        **$('#option2').html('')// 얘안에 있는 HTML 다 지우기(input값 변경할 때마다 추가되는 버그제거)**
+        var 템플릿 = `<option>95</option>
+        <option>100</option>
+        <option>105</option>`;
+        $('#option2').append(템플릿);
+        } **else if ($('#option1').val() == '바지') {
+          // 템플릿을 만들고
+          $('#option2').html('')// 얘안에 있는 HTML 다 지우기(input값 변경할 때마다 추가되는 버그제거)
+          var 템플릿 = `<option>28</option>
+          <option>30</option>
+          <option>32</option>`;
+          $('#option2').append(템플릿);**
+            }
+          })
+```
+
+## **인터랙티브 form 만들기 : forEach 반복문 사용**
+
+`<option>` 이 매우 많으면 하드코딩 하면 코드가 너무 길어짐
+
+for 반복문을 이용한 HTML 생성
+
+`백틱 문자 중간에 `${변수}` 넣는 법` → 최신 JS 문법
+
+일반 따옴표 중간에 변수넣기 : `‘문자’` + 변수 + `’문자’` but 신문법 사용하면 굳이 사용안해도 됨
+
+```jsx
+var 사이즈 = [26, 28, 30, 32, 34, 36];
+      $('#option1').on('change', function() {
+        if( $('#option1').val() == '바지') {
+            $('#option2').html('')
+        **for(var i = 0; i < 6; i++) {
+      var 템플릿 = `<option>${사이즈[i]}</option>`;**
+      $('#option2').append(템플릿);
+        }
+          }
+        })
+```
+
+`array.forEach()` 로 반복하기
+
+→ 어레이 자료 개수만큼 반복
+
+```jsx
+var 사이즈 = [26, 28, 30, 32, 34, 36];
+
+사이즈.forEach(function (i) {
+  console.log(i); //사이즈 개수만큼 반복할 코드, i는 저장된 데이터
+}); // 26 28 30 32 34 36
+```
+
+```jsx
+var 사이즈 = [26, 28, 30, 32, 34, 36];
+
+$("#option1").on("change", function () {
+  if ($("#option1").val() == "바지") {
+    $("#option2").html("");
+
+    사이즈.forEach(function (i) {
+      var 템플릿 = `<option>${i}</option>`;
+      $("#option2").append(템플릿);
+    });
+  }
+});
+```
+
+forEach()용도
+
+1. for 반복문보다 더 쉽게 쓸 수 있음
+2. [Array] {Object} 안에 있는 자료 출력
+
+**Arrow Function**
+
+자바스크립트에서 콜백함수를 사용할 때 콜백함수를 조금 더 예쁜 모양으로 사용가능
+
+```jsx
+var 사이즈 = [26, 28, 30, 32, 34, 36];
+사이즈.forEach(function (i) {
+  console.log(i);
+});
+
+사이즈.forEach((i) => {
+  console.log(i);
+});
+```
+
+function이라는 키워드 대신 `=>` 라는 화살표를 이용가능
+
+특징
+
+1. 파라미터가 하나면 소괄호를 생략 가능
+
+2. 함수의 중괄호 내에 **return 어쩌구~** 한줄밖에 없으면 {} 중괄호도 생략 가능.
+
+3. function 문법 내에선 this라는 키워드의 값이 새롭게 변합니다. 하지만 arrow function의 경우 그냥 함수 바깥에 있던 this를 그대로 사용
+
+→ 그래서 function 내에서 this값을 쓰고 싶을 때 arrow function을 쓸지 말지를 잘 생각!
