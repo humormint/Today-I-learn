@@ -2059,8 +2059,6 @@ function이라는 키워드 대신 `=>` 라는 화살표를 이용가능
 
   자바스크립트에서 소수점과 같이 연산할 때 주의점
 
-  ![스크린샷 2022-02-25 오후 8.15.44.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ccab52aa-b89c-4638-911f-8bc01b950fed/스크린샷_2022-02-25_오후_8.15.44.png)
-
   → 1.1 곱하니까 작은 오차가 발생함 why? 컴퓨터는 2진법으로 바꿔서 연산하기 때문에
 
   → 정확한 연산을 하고 싶으면 라이브러리를 쓰던가 반올림하면 됨
@@ -2204,8 +2202,6 @@ function이라는 키워드 대신 `=>` 라는 화살표를 이용가능
 
   ## 탭 기능 만들기
 
-  ![스크린샷 2022-02-26 오후 4.15.54.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6a6c5090-9183-49cb-b4a5-cf543ed92a49/스크린샷_2022-02-26_오후_4.15.54.png)
-
   → 탭의 html, css는 강의 하단에 첨부
 
   → 탭으로 탭 기능 만들기
@@ -2303,8 +2299,6 @@ function이라는 키워드 대신 `=>` 라는 화살표를 이용가능
       $(".tab-content").eq(0).addClass("show");
     }); // tab 3개 중에 0번째 버튼만 선택!
   ```
-
-  ![스크린샷 2022-02-26 오후 5.47.43.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3214a50c-207e-4d32-8517-2a8c5651bb13/스크린샷_2022-02-26_오후_5.47.43.png)
 
   ## 탭 기능 만들기: for반복문으로 코드 줄이기
 
@@ -2539,13 +2533,7 @@ function이라는 키워드 대신 `=>` 라는 화살표를 이용가능
   $("#text").html(어레이[1]);
   ```
 
-  ![스크린샷 2022-02-27 오후 4.56.46.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8e3a8a7e-ad61-4f44-8911-1a75114693a7/스크린샷_2022-02-27_오후_4.56.46.png)
-
   →
-
-  ![스크린샷 2022-02-27 오후 4.57.08.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2e275fc6-f456-4640-b8e7-0c3df9322cae/스크린샷_2022-02-27_오후_4.57.08.png)
-
-  ![스크린샷 2022-02-27 오후 4.58.52.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/dc82ea56-7109-49e7-ac7b-9b34c92941cc/스크린샷_2022-02-27_오후_4.58.52.png)
 
   → 오브젝트로도 데이터 바인딩 가능
 
@@ -2591,8 +2579,6 @@ function이라는 키워드 대신 `=>` 라는 화살표를 이용가능
   </form>
   ```
 
-  ![스크린샷 2022-02-28 오전 10.55.38.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6b8c207d-b28c-4df6-ac42-0e879e8ca84f/스크린샷_2022-02-28_오전_10.55.38.png)
-
   → 셔츠를 고르면 셔츠 사이즈를 고르는 셀렉트 폼 보여주기
 
   `<select>` → input과 유사함, 안에 `<option>` 태그 추가하면 여러가지 옵션이 보임
@@ -2622,11 +2608,7 @@ function이라는 키워드 대신 `=>` 라는 화살표를 이용가능
   });
   ```
 
-  ![스크린샷 2022-02-28 오전 11.47.28.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/be7b5687-aaef-49bf-8c3f-50bdecef3ddf/스크린샷_2022-02-28_오전_11.47.28.png)
-
   → 모자를 고르면 셔츠 사이즈를 고르는 select 폼 숨기기
-
-  ![스크린샷 2022-02-28 오전 11.54.00.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/28b6736e-4b3d-48af-9aaf-089a4b8b37b1/스크린샷_2022-02-28_오전_11.54.00.png)
 
   ```jsx
   $('#option1').on('change', function(){  // select 인풋에서 셔츠라는 값을 선택하면 밑에 그 UI를 보여줌
@@ -2719,10 +2701,6 @@ function이라는 키워드 대신 `=>` 라는 화살표를 이용가능
             })
   ```
 
-  ![스크린샷 2022-02-28 오후 3.55.21.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bd8813a9-166e-45d0-b860-404a223b4761/스크린샷_2022-02-28_오후_3.55.21.png)
-
-  ![스크린샷 2022-02-28 오후 3.55.33.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e5417322-4412-48cc-8496-fe3e68bb0387/스크린샷_2022-02-28_오후_3.55.33.png)
-
   ## **인터랙티브 form 만들기 : forEach 반복문 사용**
 
   `<option>` 이 매우 많으면 하드코딩 하면 코드가 너무 길어짐
@@ -2745,8 +2723,6 @@ function이라는 키워드 대신 `=>` 라는 화살표를 이용가능
             }
           })
   ```
-
-  ![스크린샷 2022-02-28 오후 7.09.33.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c4c02966-183c-41bd-be40-d54e0b0998c1/스크린샷_2022-02-28_오후_7.09.33.png)
 
   `array.forEach()` 로 반복하기
 
@@ -3443,4 +3419,65 @@ $("button").click(function () {
     h1태그.innerHTML = h1태그.innerHTML + 원래글씨[2];
   }, 1500); // 0.5초 후에 h1안에 c를 더함
 });
+```
+
+setTimeout 반복문 돌리기
+
+```jsx
+for (var i = 0; i < 원래글씨.length; i++) {
+  setTimeout(function () {
+    h1태그.innerHTML = h1태그.innerHTML + 원래글씨[i];
+  }, 500 * i); // 0.5초 후에 h1안에 a를 더함
+}
+```
+
+→ `undefined` → 반복문은 0.001초만에 6번 반복 끝냄 but, setTimeout은 0.5초 후에 실행함
+
+→ `let` 으로 고치면 반복문이 잘 돌아감
+
+```jsx
+var h1태그 = document.querySelector('h1')
+      var 원래글씨 = document.querySelector('h1').innerHTML
+      $('button').click(function() { // 버튼을 누르면
+      h1태그.innerHTML = ''  // h1 빈칸으로 만들고
+
+      for(let i = 0;  i < 원래글씨.length; i++){
+      setTimeout(function() {
+          h1태그.innerHTML = h1태그.innerHTML + 원래글씨[i]
+      }, 500 * i) // 0.5초 후에 h1안에 a를 더함
+    }
+```
+
+응용 : 한글 자음모음 타이핑 효과
+
+ex) 안녕하세요
+
+→ ㅇ → 아 → 안 → ㄴ → 녀 → 녕 ...
+
+앞 내용 지우고 더하는 식으로 진행돼야 함
+
+→ 한글 타이핑 효과 라이브러리 쓰는게 편함
+
+함수화하기
+
+변수를 파라미터로 바꿔줘야 다른데도 적용 가능
+
+```jsx
+var h1태그 = document.querySelector("h1");
+var 원래글씨 = document.querySelector("h1").innerHTML;
+
+$("button").click(function () {
+  // 버튼을 누르면
+  애니메이션(h1태그, 원래글씨);
+});
+
+function 애니메이션(h1태그, 원래글씨) {
+  h1태그.innerHTML = ""; // h1 빈칸으로 만들고
+
+  for (let i = 0; i < 원래글씨.length; i++) {
+    setTimeout(function () {
+      h1태그.innerHTML = h1태그.innerHTML + 원래글씨[i];
+    }, 500 * (i + 1)); // 0.5초 후에 h1안에 a를 더함
+  }
+}
 ```
