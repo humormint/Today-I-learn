@@ -790,7 +790,6 @@ for (var i = 0; i < 3; i++) {
 
 내부 코드는 addEventListener, 클릭 되면 콜백함수 내의 **`모달창들[i].style.display = 'block';`** 을 실행해주세요~ 라는 코드임
 
-→ 그 부분은 **반복문과 동시에 실행되지 않습니다. 좀 나중에 클릭 되면 실행되겠죠 뭐.**
 
 누군가 버튼을 클릭하면 addEventListener 내의 **`모달창들[i].style.display = 'block';`**코드가 발동됨
 
