@@ -544,3 +544,262 @@ if (true) {
 ```
 
 → 첫번째 if문 안은 `var b = 2;` 만 남고, 두번째 if문은 `let b = 3;` 가 줄괄호 안에서 쓰이고 끝났기 때문에 외부에서 출력한 b 는 `2`가 된다.
+
+## 연습문제
+
+문제1
+
+```jsx
+함수();
+function 함수() {
+  console.log(안녕);
+  let 안녕 = "Hello!";
+}
+```
+
+→ 에러 출력
+
+→ 함수 만들기 전에 `함수()` 써도됨
+
+`let 안녕 = ‘hello’` 만들기도 전에 `‘안녕’`을 출력하라고 함 → 에러발생
+
+`let 안녕` 은 `Hoisting` 이 됨 하지만, `let`과 `const`는 이런행위 금지 `undefined` 라는 값이 할당되지 X
+
+`var` : `Hoisting`시 `undefined` 할당됨
+
+`let`, `const` : `Hoisting`시 `undefined` 값이 할당X (temporal deadzone / uninitialized)
+
+→ 그냥 빈 공간으로 있는 상태로 인식 → 에러 출력
+
+문제2
+
+```jsx
+함수();
+var 함수 = function () {
+  console.log(안녕);
+  var 안녕 = "Hello!";
+};
+```
+
+→ 에러 출력 (함수가 아닌데요? 라는 에러, 함수가 아닌것에 소괄호를 치면 에러 출력 Why? 아직 할당되지않고 선언만 된 상태이기 때문에)
+
+→ 함수 실행을 함수선언 전에 해도 됨
+
+function 함수() {} : 전부가 Hoisting됨
+
+var 함수 = Function() {} : 선언 부분만 Hoisting됨, 할당은 Hoisting되지 X
+
+문제3
+
+```jsx
+let a = 1;
+var 함수 = function () {
+  a = 2;
+};
+console.log(a);
+```
+
+→ a는 1이 출력됨
+
+a는 1이라는 변수를 만들고
+
+→ 함수를 만들고 함수 안에서 a = 2라고 값을 변경
+
+함수를 정의만 했지 **실행을 안시켜서** a = 2라는 부분은 없는 코드나 마찬가지
+
+→ a 는 그냥 1
+
+문제4
+
+```jsx
+let a = 1;
+var b = 2; // 전역변수
+window.a = 3;
+window.b = 4;
+
+console.log(a + b);
+```
+
+a는 1, b는 4가 출력
+
+**b가** 4가 되는 이유는 `var b = 2` 와 `window.b = 4` 이 동일한 기능을 하는 코드이기 때문
+
+→ b는 그냥 4로 재할당 되었다고 보면됨
+
+**a는** let 변수로 1을 할당하고 글로벌 변수로 3을 할당
+
+→ 이 경우 우리가 a를 사용했을 때 조금 더 **범위가 작고 가까운 1**을 참조해서 사용
+
+(자바스크립트 변수를 사용할 때 참조할만한 변수가 내 주변에 없으면 계속 상위 중괄호로 시선을 돌리면서 참조함)
+
+문제5
+
+**콘솔창에 1초에 한번씩 1부터 5까지의 정수 출력**
+
+저번 연습문제에서 setTimeout이라는 유용한 함수를 배운 것 같습니다.
+
+그래서 코드를 이렇게 작성했습니다.
+
+```jsx
+setTimeout(function () {
+  console.log(1);
+}, 1000);
+setTimeout(function () {
+  console.log(2);
+}, 2000);
+setTimeout(function () {
+  console.log(3);
+}, 3000);
+setTimeout(function () {
+  console.log(4);
+}, 4000);
+setTimeout(function () {
+  console.log(5);
+}, 5000);
+```
+
+→ 반복문 축약
+
+```jsx
+for (var i = 0; i < 5; i++) {
+  setTimeout(function () {
+    console.log(i);
+  }, i * 1000);
+}
+```
+
+→ 5가 다섯번 출력됨
+
+**Q. 해결할 방법은 ?**
+
+```jsx
+for (var i = 0; i < 5; i++) {
+  setTimeout(function () {
+    console.log(i);
+  }, i * 1000);
+}
+```
+
+내부 코드 → `setTimeout` X초후에 콜백함수 내의 `console.log(i)`를 실행해주세요~ 라는 코드
+
+→ 그 부분은 **반복문과 동시에 실행되지 않음**
+
+반복문을 해석한 후.. 1초가 지나면 setTimeout 내의 console.log(i)가 발동
+
+but, i를 채워넣고싶어서 주변을 살펴보았더니 i값은 5밖에 없음
+
+why? → 아까 반복문이 5번 실행되면서 i값은 0,1,2,3 ... 이렇게 차례로 변하다가 i값이 5가 되어 종료됨
+
+그리고 i 값은 var로 만든 전역변수 → i값을 쓰려고 봤더니 전역변수 i = 5밖에 없어서 5를 집어넣어서 계속 실행해서 콘솔창에 5가 계속 출력
+
+해결책은 for 반복문에서 i변수를 만들 때 `var` 대신 `let`으로 바꾸는 것!
+
+let 변수는 범위가 중괄호이기 때문에 `for 반복문도 중괄호`에 해당됨
+
+→ 1초 후 console.log(i)가 실행될 때 i값을 채우려고 살펴보면
+
+i값이 for 반복문 내에 남아있기 때문에 그걸 가져다 쓰게됨
+
+그래서 아까처럼 계속 5를 출력해주는게 아니라 1,2,3,4,5를 출력
+
+(위의 예제는 0,1,2,3,4가 출력)
+
+**6. 버튼을 누르면 모달창을 띄우기 (이벤트리스너 반복시키기)**
+
+```jsx
+<div style="display : none">모달창0</div>
+<div style="display : none">모달창1</div>
+<div style="display : none">모달창2</div>
+
+<button>버튼0</button>
+<button>버튼1</button>
+<button>버튼2</button>
+
+<script>
+//?
+</script>
+```
+
+0번째 버튼을 누르면 0번째 모달창,
+
+1번째 버튼을 누르면 1번째 모달창을 보여주기
+
+```jsx
+<div style="display : none">모달창0</div>
+<div style="display : none">모달창1</div>
+<div style="display : none">모달창2</div>
+
+<button>버튼0</button>
+<button>버튼1</button>
+<button>버튼2</button>
+
+<script>
+var 버튼들 = document.querySelectorAll('button');
+var 모달창들 = document.querySelectorAll('div');
+
+버튼들[0].addEventListener('click', function(){
+  모달창들[0].style.display = 'block';
+});
+
+버튼들[1].addEventListener('click', function(){
+  모달창들[1].style.display = 'block';
+});
+
+버튼들[2].addEventListener('click', function(){
+  모달창들[2].style.display = 'block';
+});
+
+</script>
+```
+
+`document.querySelectorAll`은 `jQuery의 $('')` 셀렉터와 매우 유사합니다. 동시에 여러 요소를 찾아 어레이 비슷한 자료형에 담아줌
+
+0번째 버튼을 누르면 0번째 모달창,
+
+1번째 버튼을 누르면 1번째 모달창을 보여줌
+
+→ 반복문 안에 담아서 한번 다시 개발
+
+```jsx
+<script>
+var 버튼들 = document.querySelectorAll('button');
+var 모달창들 = document.querySelectorAll('div');
+
+for (var i = 0; i < 3; i++){
+
+  버튼들[i].addEventListener('click', function(){
+    모달창들[i].style.display = 'block';
+  });
+
+}
+
+</script>
+```
+
+**Q. 위 코드는 왜 의도대로 동작하지 않는 것이죠? 해결할 방법은 무엇일까요?**
+
+→ 방금 전 문제랑 거의 똑같은 경우의 문제
+
+```jsx
+for (var i = 0; i < 3; i++) {
+  버튼들[i].addEventListener("click", function () {
+    모달창들[i].style.display = "block";
+  });
+}
+```
+
+내부 코드는 addEventListener, 클릭 되면 콜백함수 내의 **`모달창들[i].style.display = 'block';`** 을 실행해주세요~ 라는 코드임
+
+→ 그 부분은 **반복문과 동시에 실행되지 않습니다. 좀 나중에 클릭 되면 실행되겠죠 뭐.**
+
+누군가 버튼을 클릭하면 addEventListener 내의 **`모달창들[i].style.display = 'block';`**코드가 발동됨
+
+but, i를 쓰고싶어서 주변을 살펴보았더니 i값은 3밖에 없음
+
+why? → 아까 반복문이 3번 실행되면서 i값은 0,1,2,3 ... 이렇게 차례로 변하다가 i값이 3이 되어 종료
+
+i 값은 var로 만든 전역변수 → i값을 쓰려고 봤더니 **전역변수 i = 3밖에 없어서 3을 집어넣어서 계속 에러발생**
+
+해결책은 for 반복문에서 i변수를 만들 때 `var` 대신 `let`으로 바꾸는 것!!
+
+반복문이 돌고 나서도 let i = 어쩌구 값이 {for 반복문} 내에 남아있기 때문에 그걸 **`모달창들[i].style.display = 'block';`** 의 i값으로 가져다 쓰게 됨
