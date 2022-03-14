@@ -4363,3 +4363,452 @@ attribute 변경할 때마다 html 재렌더링 할 때?
 ```
 
 → Web Components 기능 쓰면 긴 HTML도 함수처럼 재사용 가능!
+
+## Shadow DOM과 template
+
+```jsx
+<input type="range">
+```
+
+![스크린샷 2022-03-14 오후 2.06.33.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/60152dc7-8432-467d-a75e-2796718f2324/스크린샷_2022-03-14_오후_2.06.33.png)
+
+→ 실제로 내부적으로도 여러개의 <div>를 이용해서 만들어진 것
+
+→ Shadow DOM 덕분에 가능함
+
+![스크린샷 2022-03-14 오후 2.16.06.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/eafe1b96-51e4-44e3-93be-cf13854f5f4f/스크린샷_2022-03-14_오후_2.16.06.png)
+
+`사용자 에이전트 그림자 DOM 표시` 에 체크하면 input 태그 열어볼 수 있음
+
+![스크린샷 2022-03-14 오후 2.17.20.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8ce41208-5c02-4521-9f37-36a018e4a926/스크린샷_2022-03-14_오후_2.17.20.png)
+
+→ 이런식으로 HTML을 몰래 숨겨 놓을 수 있음(Shadow DOM)
+
+→ 개발자 편의를 위해 만듦
+
+### Shadow DOM 만드는 법
+
+```html
+<div class="mordor"></div>
+    <script>
+    document.querySelector('.mordor').attachShadow({mode : 'open'})
+    </script>
+```
+
+`.attachShadow({mode : 'open'})` → 쉐도우 공간 열어주는 함수 
+
+![스크린샷 2022-03-14 오후 2.42.44.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1fec76a9-311b-4c82-ab8b-b08a84d4a3dd/스크린샷_2022-03-14_오후_2.42.44.png)
+
+```html
+<div id="mordor"></div>
+    <script>
+    document.querySelector('#mordor').attachShadow({mode : 'open'}) // 쉐도우 공간 열어주는 함수
+    document.querySelector('#mordor').shadowRoot.innerHTML = `<p> 쉐도우 루트</p>`
+    </script>
+```
+
+![스크린샷 2022-03-14 오후 2.51.56.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e3996658-7a22-44a5-9937-21c12f1d4b00/스크린샷_2022-03-14_오후_2.51.56.png)
+
+왜 쓸까 ? 
+
+→ Web Components + Shadow DOM
+
+→ 완벽한 HTML 모듈화 가능!
+
+Q. Web Component 에 스타일도 넣고 싶으면 ?
+
+```jsx
+<custom-input></custom-input>
+     <script>
+ 
+         class 클래스 extends HTMLElement {
+             connectedCallback(){ // 내가 만든 태그가 HTML에 정착될 때 실행할 코드 적는 곳 
+                 this.innerHTML = `<label>이메일인풋이에요</label><input>
+                 **<style>label{color : red }</style>`;**
+             }
+         }
+         customElements.define('custom-input', 클래스);
+```
+
+![스크린샷 2022-03-14 오후 3.31.14.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/93b930f0-31a9-4de1-b66b-2049786d01d3/스크린샷_2022-03-14_오후_3.31.14.png)
+
+→ 이 방법은 위험함 → `<label></label>` 다른곳에 가져다  써도 빨간색으로 스타일 변경됨
+
+→ Shadow DOM 쓰면 좋음
+
+→ Shadow DOM에 넣은 것들은 외부에 영향X
+
+```jsx
+class 클래스 extends HTMLElement {
+             connectedCallback(){ // 내가 만든 태그가 HTML에 정착될 때 실행할 코드 적는 곳 
+                 this.attachShadow({mode : 'open'}) 
+                 **this.shadowRoot.innnerHTML = `<label>이메일인풋이에요</label><input>
+                 <style>label{color : red }</style>`;**
+             }
+         }
+         customElements.define('custom-input', 클래스);
+```
+
+→ 결과는 같지만 Shadow안에서만 놀기 때문에 부작용을 발생시키지X (독립적인 공간이기 때문에) → 모듈과 가능
+
+but Web Component는 그냥 짜면 코드가 더러움
+
+→ <HTML 임시보관함> 에다가 보관해서 씀 
+
+→ HTML 임시보관함 `<template>`
+
+→ `<template></template>` → HTML페이지에 렌더링 되지 X
+
+```jsx
+<custom-input></custom-input>
+     
+     **<template id="tem1">
+        <label>이메일인풋이에요</label><input>
+        <style>label{color : red }</style>
+     </template>**
+     <script>
+         class 클래스 extends HTMLElement {
+             connectedCallback(){ // 내가 만든 태그가 HTML에 정착될 때 실행할 코드 적는 곳 
+                 this.attachShadow({mode : 'open'}) 
+                 this.shadowRoot.**append(tem1.content.cloneNode(true))**
+             }
+         }
+         customElements.define('custom-input', 클래스);
+</script>
+```
+
+→ but, Web Component 생성도와주는 라이브러리 많기 때문에 사용하는게 더 편함
+
+shadow DOM에 이벤트리스너 부착가능
+
+```jsx
+class 클래스 extends HTMLElement {
+             connectedCallback(){ // 내가 만든 태그가 HTML에 정착될 때 실행할 코드 적는 곳 
+                 this.attachShadow({mode : 'open'}) 
+                 this.shadowRoot.append(tem1.content.cloneNode(true))
+                 
+                 **let el = this.shadowRoot.querySelector('label')
+                 el.addEventListener('click', function(){
+                     console.log('클릭함')**
+                 })
+             }
+         }
+         customElements.define('custom-input', 클래스);
+ </script>
+```
+
+![스크린샷 2022-03-14 오후 4.12.04.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0cb918ec-c33d-46e7-a75d-8104cf05f40c/스크린샷_2022-03-14_오후_4.12.04.png)
+
+## **class로 만들어보는 간단한 2D 게임**
+
+게임의 원리와 구현방법
+
+1. HTML에 네모, 원 그릴 수 있어야 함
+2. 프레임마다(1초에 60번) 코드실행 가능해야함 → 애니메이션 위해 
+3. collision check 할 수 있어야함
+
+ex) 공룡이 장애물 체력 만나면(충돌하면) 체력이 깎이거나 
+
+네모그리는 법 (유닛 생성법)
+
+```jsx
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth - 100;
+canvas.height = window.innerHeight - 100;
+
+ctx.fillStyle = "green";
+ctx.fillRect(10, 10, 100, 100); // 왼쪽위에서부터 10,10  위치에다가 100*100 사이즈로
+```
+
+![스크린샷 2022-03-14 오후 6.18.28.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3b4645e2-481b-4398-9cab-0e9b555edc10/스크린샷_2022-03-14_오후_6.18.28.png)
+
+→ 첫 번째 게임 유닛
+
+등장 캐릭터의 속성부터 Object 자료에 정리해두면 편리
+
+```jsx
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth - 100;
+canvas.height = window.innerHeight - 100;
+
+var dino = {
+  x: 10,
+  y: 200, // 공룡 등장 좌표
+  width: 50,
+  height: 50, // 공룡 폭과 높이
+  draw() {
+    ctx.fillStyle = "green";
+    ctx.fillRect(this.x, this.y, this.width, this.height); // 확장성 있는 코드
+  },
+};
+dino.draw(); // dino 등장시키고 싶을때마다
+```
+
+![스크린샷 2022-03-14 오후 6.37.40.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3106cd97-b5ce-4faf-ae2e-a85e80b3604f/스크린샷_2022-03-14_오후_6.37.40.png)
+
+→ but 장애물들은 width, height 가 각각 다를 수도 있음
+
+→ 비슷한 object가 많이 필요함 → class로 만듦
+
+```jsx
+class Cactus {
+  constructor() {
+    this.x = 500;
+    this.y = 200;
+    this.width = 50;
+    this.height = 50;
+  }
+  draw() {
+    ctx.fillStyle = "green";
+    ctx.fillRect(this.x, this.y, this.width, this.height); // 확장성 있는 코드
+  }
+}
+
+var cactus = new Cactus(); // 장애물 뽑고 싶으면 
+cactus.draw()
+```
+
+![스크린샷 2022-03-14 오후 6.56.36.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/29556c9b-199c-43bb-b367-8a031f201642/스크린샷_2022-03-14_오후_6.56.36.png)
+
+애니메이션을 만드려면
+
+`dino.x = 100;` → 이러면 되지만 이건 애니메이션이 아님! 
+
+→ 1초에 60번 x++ 해워야함1 → `dino.x =100;` but 게임개발 본격적으로 하려면 라이브러리 쓰는게 더 좋음
+
+`requestAnimationFrame()` 사용!
+
+```jsx
+function 프레임마다실행할코드() {
+  requestAnimationFrame(프레임마다실행할코드);
+  dino.x++;
+  dino.draw();
+}
+프레임마다실행할코드();
+```
+
+→ 프레임마다 1px씩 이동
+
+![스크린샷 2022-03-14 오후 7.11.05.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e8b92676-a2c1-4e69-945c-02704e37c1c2/스크린샷_2022-03-14_오후_7.11.05.png)
+
+but 잔상이 남음 → 지우고 그리고록하기 → `ctx.clearRect(0, 0, canvas.width, canvas.height);`
+
+```jsx
+function 프레임마다실행할코드() {
+  requestAnimationFrame(프레임마다실행할코드);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  dino.x++;
+  dino.draw();
+}
+프레임마다실행할코드();
+```
+
+![스크린샷 2022-03-14 오후 7.17.54.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/dbfa2ef4-5777-4a93-b710-fa6ad16b4e9c/스크린샷_2022-03-14_오후_7.17.54.png)
+
+장애물들이 생겨서 좌측으로 서서히 이동
+
+→ 장애물은 2 ~ 3초에 한번 생성되게 → `var cactus = new Cactus()` 
+
+장애물 여러개 관리하기
+
+tip) 장애물 만들 때마다 array에 담아서 보관!
+
+```jsx
+var timer = 0; // 타이머는 프레임마다 1씩 올라감
+var cactus여러개 = [];
+
+function 프레임마다실행할코드() {
+  requestAnimationFrame(프레임마다실행할코드);
+  timer++;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (timer % 120 === 0) {
+    // 모니터는 1초에 144 프레임 보여줌
+    var cactus = new Cactus();
+    cactus여러개.push(cactus); // 120프레임마다 한번씩 cactus 스폰해서 저 어레이에 담아줌
+    cactus.draw();
+  }
+  cactus여러개.forEach((a) => { // array에 있던거 다 draw()
+    a.x--;
+    a.draw();
+  });
+  dino.draw();
+}
+프레임마다실행할코드();
+```
+
+![스크린샷 2022-03-14 오후 8.03.14.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/560e7dbb-b7cc-4b14-ae84-aaaa332016ed/스크린샷_2022-03-14_오후_8.03.14.png)
+
+스페이스바 누르면 점프
+
+![스크린샷 2022-03-14 오후 8.53.03.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d43e6309-547b-477a-9836-c703576c004c/스크린샷_2022-03-14_오후_8.53.03.png)
+
+```jsx
+var timer = 0; // 타이머는 프레임마다 1씩 올라감
+var cactus여러개 = [];
+var 점프timer = 0;
+
+function 프레임마다실행할코드() {
+  requestAnimationFrame(프레임마다실행할코드);
+  timer++;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (timer % 120 === 0) {
+    // 모니터는 1초에 120 프레임 보여줌
+    var cactus = new Cactus(); // 장매물 하나 소환
+    cactus여러개.push(cactus); // 120프레임마다 한번씩 장애물 뽑아서 저 어레이에 담아줌
+    cactus.draw();
+  }
+  cactus여러개.forEach((a, i, o) => {
+    // array에 있던거 다 draw()
+    if (a.x < 0) {
+      o.splice(i, 1);
+    }
+     a.x--; // 1초에 60번정도 x좌표를 1씩빼라 -> 1초에 60px씩 왼쪽이동
+    a.draw();
+  });
+
+  if (점프중 == true) {
+    dino.y--; // 스페이스 누르면 점프
+    점프timer++;
+  }
+  if (점프중 == false) {
+    if (dino.y < 200) dino.y++; // 최저 y높이 정해두고 그거 이상으로는 dino.y++ 금지
+  }
+  if (점프timer > 100) {
+    // 점프 100프레임 넘으면 점프 중단
+    점프중 = false;
+    점프timer = 0;
+  }
+  dino.draw();
+}
+프레임마다실행할코드();
+
+var 점프중 = false;
+document.addEventListener("keydown", function (e) {
+  if (e.code === "Space") {
+    // 스페이스바 누르면 코드동작
+    점프중 = true;
+  }
+});
+```
+
+충돌하면 뭔가 사건 일어나도록
+
+충돌체크하기
+
+충돌 어떻게 감지? → 좌표 계산
+
+1. 캐릭터의 x좌표와 장애물의 x좌표 빼기 → 음수면 만났다고 처리
+
+**x좌표 - x좌표**
+
+1. 캐릭터의 y좌표와 장애물의 y좌표 빼기 → 음수면 만났다고 처리
+
+**y좌표 - y좌표**
+
+네모는 일명 hitbox
+
+```jsx
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth - 100;
+canvas.height = window.innerHeight - 100;
+
+var img2 = new Image();
+img2.src = "dinosaur.png";
+
+var dino = {
+  x: 10,
+  y: 200, // 공룡 등장 좌표
+  width: 50,
+  height: 50, // 공룡 폭과 높이
+  draw() {
+    ctx.fillStyle = "green";
+    ctx.fillRect(this.x, this.y, this.width, this.height); // 확장성 있는 코드
+    ctx.drawImage(img2, this.x, this.y);
+  },
+};
+var img1 = new Image();
+img1.src = "cactus.png"; // 장애물에 이미지 추가
+
+class Cactus {
+  constructor() {
+    this.x = 500;
+    this.y = 200;
+    this.width = 50;
+    this.height = 50;
+  }
+  draw() {
+    ctx.fillStyle = "red";
+    ctx.fillRect(this.x, this.y, this.width, this.height); // 확장성 있는 코드
+    ctx.drawImage(img1, this.x, this.y);
+  }
+}
+
+var timer = 0; // 타이머는 프레임마다 1씩 올라감
+var cactus여러개 = [];
+var 점프timer = 0;
+var animation;
+
+function 프레임마다실행할코드() {
+  animation = requestAnimationFrame(프레임마다실행할코드);
+  timer++;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (timer % 120 === 0) {
+    // 모니터는 1초에 120 프레임 보여줌
+    var cactus = new Cactus(); // 장매물 하나 소환
+    cactus여러개.push(cactus); // 120프레임마다 한번씩 장애물 뽑아서 저 어레이에 담아줌
+    cactus.draw();
+  }
+  cactus여러개.forEach((a, i, o) => {
+    // array에 있던거 다 draw()
+    if (a.x < 0) {
+      o.splice(i, 1);
+    }
+    a.x--; // 1초에 60번정도 x좌표를 1씩빼라 -> 1초에 60px씩 왼쪽이동
+    충돌하냐(dino, a); // 주인공 VS 모든 장애물이기 때문에 반복문에 추가
+    a.draw();
+  });
+
+  if (점프중 == true) {
+    dino.y--; // 스페이스 누르면 점프
+    점프timer++;
+  }
+  if (점프중 == false) {
+    if (dino.y < 200) dino.y++; // 최저 y높이 정해두고 그거 이상으로는 dino.y++ 금지
+  }
+  if (점프timer > 100) {
+    // 점프 100프레임 넘으면 점프 중단
+    점프중 = false;
+    점프timer = 0;
+  }
+  dino.draw();
+}
+프레임마다실행할코드();
+
+// 충돌확인
+function 충돌하냐(dino, cactus) {
+  var x축차이 = cactus.x - (dino.x + dino.width);
+  var y축차이 = cactus.y - (dino.y + dino.height);
+  if (x축차이 < 0 || y축차이 < 0) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // 장애물 부딧히면 게임 클리어
+    cancelAnimationFrame(animation);
+  }
+}
+
+var 점프중 = false;
+document.addEventListener("keydown", function (e) {
+  if (e.code === "Space") {
+    // 스페이스바 누르면 코드동작
+    점프중 = true;
+  }
+});
+```
