@@ -1,0 +1,177 @@
+/* Web Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+Mono:wght@500;600&display=swap');
+
+body {
+    font-family: 'Black Han Sans', sans-serif;
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 13px;
+    color: #222;
+    margin:  0;
+    padding: 0; /* body의 마진이랑 패딩은 사용하지X */
+}
+/* Layout Css */
+.container {
+    background-color: #f5f5f5;
+    height: 100vh; /* 높이 항상 가득 채워라, 브라우저가 커지든 작아지든 */
+}
+
+.login {
+    /* border: 1px solid red; 잠깐 표시하기 위해서 */
+    width: 300px;
+    /* Center Layout 브라우저 사이즈에 관계 없이 중앙에 위치*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 왼쪽 상단이 기준이니까 너비와 높이의 절반을 빼줘야함*/
+}
+.header {
+    text-align: center; /*로고이미지가 인라인 요소 이기 때문에 중앙으로*/
+    border-bottom: 1px solid gray;
+    background-color: #fff;
+    padding: 10px;
+}
+/* .header img {
+    display: block;
+    margin: auto;
+} */
+.login-type {
+    /* border: 1px solid green; */
+    text-align: center;
+}
+
+.login-type h1 {
+    font-size: 30px;
+    text-align: center;
+    font-weight: normal; /*h1의 bold 빼주기*/
+}
+
+/* Button Css */
+a.btn {
+    display: block;
+    color: #fff;
+    border: 1px solid lightgray;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 15px;
+    opacity:0.8;
+    margin-bottom: 10px;
+    text-decoration: none;
+    position: relative; /* a.btn1:before의 부모요소에 지정해줘야함 */
+}
+
+a.btn:hover {
+    opacity: 1;
+}
+
+a.btn1 {
+    background-color: #fff;
+    color: #222;
+}
+a.btn2 {
+    background-color: #898c9b;
+}
+a.btn3 {
+    background-color: #11ce00;
+}
+a.btn4 {
+    background-color: #0076fe;
+}
+a.btn5 {
+    background-color: #00c026;
+}
+
+a.btn1:before {
+    content: url(LDH_LION_img/icon_google.png);
+    position: absolute; /* 가상클래스와 a태그가 부모자식 요소로 맺어질 수 있도록 해야함 */
+    left: 15px;
+    top: 15px;
+}
+a.btn2:before {
+    content: url(LDH_LION_img/icon_google.png);
+    position: absolute; /* 가상클래스와 a태그가 부모자식 요소로 맺어질 수 있도록 해야함 */
+    left: 15px;
+    top: 15px;
+}
+a.btn3:before {
+    content: url(LDH_LION_img/icon_naver.png);
+    position: absolute; /* 가상클래스와 a태그가 부모자식 요소로 맺어질 수 있도록 해야함 */
+    left: 15px;
+    top: 15px;
+}
+a.btn4:before {
+    content: url(LDH_LION_img/icon_facebook.png);
+    position: absolute; /* 가상클래스와 a태그가 부모자식 요소로 맺어질 수 있도록 해야함 */
+    left: 15px;
+    top: 15px;
+}
+a.btn5:before {
+    content: url(LDH_LION_img/icon_kakao.png);
+    position: absolute; /* 가상클래스와 a태그가 부모자식 요소로 맺어질 수 있도록 해야함 */
+    left: 15px;
+    top: 15px;
+}
+
+.or-txt {
+    display: block;
+    /* margin-bottom: 15px;
+    margin-top: 10px; */
+    margin: 15px 0  ; /* 상하 좌우*/
+    position: relative;
+}
+
+span.or-txt:before { /* 또는 의 왼쪽 줄 */
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 0;
+    background-color: #dedede;
+    width:44%;
+    height: 1px;
+}
+span.or-txt:after { /* 또는 의 왼쪽 줄 */
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: 0;
+    background-color: #dedede;
+    width:44%;
+    height: 1px;
+}
+
+/* Footer Css */
+/* .footer {
+    padding: 5px;
+    margin-top: 50px;
+}
+.footer img {
+    vertical-align: middle;
+}
+.footer a {
+    font-weight: bold;
+    color: #222;
+    text-decoration: none;
+}
+.footer a:hover {
+    text-decoration: underline;
+} 
+.footer .band-first {
+    text-align: center;
+} */
+
+
+.footer p:nth-child(1) img { 
+    vertical-align: middle;
+}
+
+.footer p:nth-child(2) { 
+    text-align: center;
+}
+.footer p:nth-child(2) a {
+    font-weight: bold;
+    color: #222;
+    text-decoration: none;
+}
+.footer p:nth-child(2) a:hover {
+    text-decoration: underline;
+}
