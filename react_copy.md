@@ -2704,7 +2704,7 @@ function App(){
 
 그리고 글 수정하고 사진넣고 해보시면 됩니다.
 
-배경사진을 넣으시려면 <Jumbotron className="background"> 이런 식으로 클래스 하나 넣어주시고
+배경사진을 넣으시려면 `<Jumbotron className="background">` 이런 식으로 클래스 하나 넣어주시고
 
 CSS 파일로 가서 .background{} 안에 스타일 작성하면 되겠죠?
 
@@ -2731,7 +2731,7 @@ public 폴더에 있는 파일은 리액트 앱을 발행했을 때 사이트 �
 
 그래서 / 이렇게 경로를 입력해도 잘 먹습니다.
 
-그래서 public 폴더에 있는 이미지들은 <img src="/image.jpg" /> 이렇게 쓰셔도 첨부가능합니다.
+그래서 public 폴더에 있는 이미지들은 `<img src="/image.jpg" />` 이렇게 쓰셔도 첨부가능합니다.
 
 ★ 리액트 17버전 이상에선 public 폴더안에 있는 이미지를 CSS파일에서는 /image.jpg 이렇게 첨부할 수 없습니다. CSS파일에 작성할 이미지들은 src폴더 쓰셈
 
@@ -2815,7 +2815,7 @@ function App(){
 
 1. 오늘 만들었던 상품리스트를 이번엔 <컴포넌트>로 만들어서 첨부해보세요
 
-2. <컴포넌트>에 실제 상품명이 뜨도록 **{데이터바인딩}** 완료해보십시오. <컴포넌트>3개가 필요하겠군요.
+2. <컴포넌트>에 실제 상품명이 뜨도록 **`{데이터바인딩}`** 완료해보십시오. <컴포넌트>3개가 필요하겠군요.
 
 3. 컴포넌트 3개를 map 반복문을 돌려봅시다
 
@@ -2856,7 +2856,7 @@ import / export 문법인데 한번 배워두시면 이제 모든걸 다 외부�
 
 실제 서버에서 보내준 쇼핑데이터라고 생각하고 이걸 HTML에 박아넣어보도록 합시다.
 
-**하지만 너무 길어서 이걸 data.js 같은 파일을 만들어서 안에 담은 뒤에 App.js에서 data.js에 있던걸 불러와**보도록 합시다.
+**하지만 너무 길어서 이걸 `data.js` 같은 파일을 만들어서 안에 담은 뒤에 App.js에서 data.js에 있던걸 불러와**보도록 합시다.
 
 그러려면 일단 `import / export` 문법부터 알아야합니다.
 
@@ -2866,7 +2866,7 @@ data.js ---> App.js 이렇게 변수, 혹은 데이터를 보내려면
 
 2. App.js에서는 data.js를 import 하시면 됩니다.
 
-**export default 문법**
+**`export default` 문법**
 
 ```jsx
 (data.js 파일)
@@ -2881,7 +2881,7 @@ src 폴더에 App.js와 나란히 data.js를 만들었습니다.
 이 파일에서 중요한 변수를 export하고 싶을 땐 export default라는 문법을 쓰시고 우측에 배출을 원하는 변수를 담아줄 수 있습니다.
 
 - 변수명, 함수명, 자료형 전부 배출가능합니다.
-- 파일마다 export default 라는 키워드는 하나만 사용가능합니다.
+- 파일마다 `export default` 라는 키워드는 하나만 사용가능합니다.
 
 끝입니다.
 
@@ -2895,7 +2895,7 @@ import 중요데이터 from './data.js';
 
 App.js에서 data.js 에서 배출한 변수를 쓰고싶다면
 
-import 변수명 from '경로'
+`import 변수명 from '경로'`
 
 라고 작성해서 다른 파일에서 배출한 변수를 갖다쓸 수 있습니다.
 
@@ -2904,7 +2904,7 @@ import 변수명 from '경로'
 - 변수명이라는 부분은 자유롭게 작명하실 수 있습니다.
 - 경로쓰실 때 ./ 라는 것은 현재경로입니다.
 
-**export {} 문법**
+**`export {}` 문법**
 
 여러개의 변수들을 내보내고싶으면 export default 말고 이런 문법을 씁니다.
 
@@ -2913,21 +2913,21 @@ import 변수명 from '경로'
 
 var name1 = 'Kim';
 var name2 = 'Park';
-export { name1, name2 }
+**export { name1, name2 }**
 ```
 
 그럼 원하는 변수명, 함수명을 내보낼 수 있습니다.
 
 아까와는 다르게 꼭 변수나 함수명이 있어야합니다.
 
-**import {} 문법**
+**`import {}` 문법**
 
 export {} 이걸로 내보낸 변수들을 갖다쓰고 싶으면 import {} 문법을 씁니다.
 
 ```jsx
 (App.js 파일)
 
-import { name1, name2 } from './data.js';
+**import { name1, name2 } from './data.js';**
 ```
 
 이렇게 export 했던 변수명을 원하는 것만 골라서 써주시면 됩니다.
@@ -2946,7 +2946,7 @@ import { name1, name2 } from './data.js';
 
 근데 너무 길어서 data.js라는 파일에 보관한 뒤에 App.js로 가져오고 싶습니다. 어떻게 하면 될까요?
 
-(state 이름은 shoes로 합시다)
+(state 이름은 `shoes`로 합시다)
 
 (필요한건 다 배웠으니 혼자 해보시면 됩니다)
 
@@ -3006,8 +3006,6 @@ function App(){
 
 데이터라고 이름짓고 그걸로 state를 만들어버렸지뭐에얌
 
-[collapse]
-
 **상품데이터를 HTML에 데이터바인딩하기**
 
 여러분이 방금 import 해온건 상품 3개의 데이터입니다.
@@ -3054,3 +3052,921 @@ shoes라는 state에 보관하던 실제 데이터를 박아넣어봤습니다.
 이런 식으로 쭉~ 하면 실제 데이터를 사용자에게 보여줄 수 있겠군요.
 
 그리고 집가서 상단에 있는 오늘의 숙제 마무리해보시길 바랍니다.
+
+## ****숙제 해설 : 상품목록 Component화 + 반복문****
+
+저번시간 내드린 숙제를 해결해보도록 합시다.
+
+그냥 상품리스트들을 컴포넌트로 만들고, 데이터바인딩하고
+
+필요하면 반복문을 돌려보는 숙제였습니다. 다 배웠던 것들이니 스무스하게 시작해봅시다.
+
+**일단 터미널창에 뜨는 warning부터 해결합시다.**
+
+노란색 warning은 그냥 잔소리입니다.
+
+**"이미지에 alt="" 넣어주세요"**
+
+**"변수 선언만하고 안쓰셨어요"**
+
+이런 잔소리가 귀찮다면
+
+페이지 맨 위에 **/*eslint-disable*/** 이라는 코드를 추가합니다.
+
+이제 잔소리 안뜹니다.
+
+**숙제1-1. 상품레이아웃 컴포넌트화하기**
+
+```jsx
+(App.js 파일)
+
+function App(){
+
+  let [shoes, shoes변경] = useState(Data);
+  return (
+    <div className="App">
+      <Navbar></Navbar> (그 사이트에 있던 navbar 예제 어쩌구)
+      <Jumbotron></Jumbotron> (그 사이트에 있던 jumbotron 예제 어쩌구)
+
+      <div className="container">
+        <div className="row">
+          <Card />
+          <Card />
+          <Card />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+**function Card(){
+  return (
+    <div className="col-md-4">
+      <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+      <h4>{ shoes[0].title }</h4>
+      <p>{ shoes[0].content } & { shoes[0].price }</p>
+    </div>
+  )
+}**
+```
+
+▲ col-md-4 라는 div박스들을 컴포넌트로 만들어서 첨부했습니다.
+
+컴포넌트 만드는건 많이 해본 것이니 자세한 설명은 필요없겠죠?
+
+근데 에러가납니다. `function Card(){}` 여기 **안에 shoes라는 변수가 없다고 에러**가 뜨네요.
+
+당연합니다. **현재 shoes 라는 state 변수는 App 컴포넌트에 있지 Card 컴포넌트에는 없으니까**요.
+
+**App이라는 컴포넌트에 있는 state를 Card에서 쓰고싶으면 `props`로 전송해주어야합니다.**
+
+**shoes라는 state를 props로 전송하려면**
+
+props 전송은 2단계를 밟아주면 된다고 했습니다.
+
+```jsx
+function App(){
+
+  let [shoes, shoes변경] = useState(Data);
+  return (
+    <div className="App">
+      <Navbar></Navbar> (그 사이트에 있던 navbar 예제 어쩌구)
+      <Jumbotron></Jumbotron> (그 사이트에 있던 jumbotron 예제 어쩌구)
+
+      <div className="container">
+        <div className="row">
+          <Card shoes={shoes} />
+          <Card shoes={shoes} />
+          <Card shoes={shoes} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Card(**props**){
+  return (
+    <div className="col-md-4">
+      <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+      <h4>{ props.shoes[0].title }</h4>
+      <p>{ props.shoes[0].content } & { props.shoes[0].price }</p>
+    </div>
+  )
+}
+```
+
+▲ 이렇게 쓰면 되겠군요
+
+1. <Card>를 첨부할 때 `shoes={shoes}`로 전송하는 문법을 썼고
+
+2. Card 컴포넌트 안에 shoes를 갖다쓸 땐 `props.shoes` 라고 사용했습니다.
+
+완성입니다. 그럼 일단 카드들이 정상적으로 출력이 됩니다.
+
+**Q. 근데 왜 다들 똑같은 상품명이 뜨는거죠?**
+
+A. Card 컴포넌트에서 데이터바인딩할 때 똑같은 데이터만 데이터바인딩 해놨으니까요.
+
+이 문제를 해결해봅시다. 각각 **<Card>마다 다른데이터를 데이터바인딩시키면 되겠죠뭐**
+
+**숙제1-2. 각각의 Card 컴포넌트마다 다른 데이터 전송해주기**
+
+그러면 각각 카드마다 다른 상품명을 보여줄 수 있으니까요.
+
+그럼 props 전송시 이런 식으로 전송해주면 되지않을까요?
+
+```jsx
+function App(){
+
+  let [shoes, shoes변경] = useState(Data);
+  return (
+    <div className="App">
+      <Navbar></Navbar> (그 사이트에 있던 navbar 예제 어쩌구)
+      <Jumbotron></Jumbotron> (그 사이트에 있던 jumbotron 예제 어쩌구)
+
+      <div className="container">
+        <div className="row">
+          <Card shoes={shoes[0]} />
+          <Card shoes={shoes[1]} />
+          <Card shoes={shoes[2]} />
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+▲ 각각의 Card마다 shoes[0], shoes[1] ... 이런 식으로 전송해주면 되겠구만요.
+
+그니까 shoes라는 **`[ {}, {}, {} ]`** 이렇게 생긴 데이터를 다 전송하는게 아니라
+
+shoes 안에 있던 하나의 {} 오브젝트만 각각 전송하자는 겁니다.
+
+각각 {} 오브젝트에는 각각 다른 상품명이 들어가있고요.
+
+그럼 이제 Card라는 컴포넌트에 작성해놨던 데이터바인딩 방법도 바꾸면 됩니다.
+
+```jsx
+function Card(props){
+  return (
+    <div className="col-md-4">
+      <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+      <h4>{ props.shoes.title }</h4>
+      <p>{ props.shoes.content } & { props.shoes.price }</p>
+    </div>
+  )
+}
+```
+
+▲ 아까 위에서 shoes[0] 이라는 데이터를 **shoes라는 이름으로 props로 전송**했기 때문에
+
+**`props.shoes[0].title`** 이게 아니라
+
+**`props.shoes.title`** 이렇게 써주시면 제목 등이 정상적으로 출력됩니다.
+
+**별거아니지만 숙제1의 교훈은:**
+
+- 같은 컴포넌트라고 항상 같은 내용만 보여줄 수 있는게 아닙니다.
+- props 등을 이용해 각각 다른 내용을 전송해주면 됩니다.
+- 그럼 같은 컴포넌트라고 해도 각각 다른 내용이 출력되는 컴포넌트를 만드실 수 있습니다.
+
+**숙제2. Card 컴포넌트 반복문 돌리기**
+
+굳이 안해도될 것 같지만
+
+진정한 개발자라면 반복되는 코드를 봤을 때 반복문 돌리고 싶어 안달 나야합니다.
+
+```jsx
+function App(){
+
+  let [shoes, shoes변경] = useState(Data);
+  return (
+    <div className="App">
+      <Navbar></Navbar> (그 사이트에 있던 navbar 예제 어쩌구)
+      <Jumbotron></Jumbotron> (그 사이트에 있던 jumbotron 예제 어쩌구)
+
+      <div className="container">
+        <div className="row">
+          {
+            **shoes.map((a,i)=>{ 
+             return <Card shoes={shoes[i]} />**
+            });
+          }
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+▲ 그래서 <Card> 3개를 map 반복문으로 돌려보았습니다.
+
+(shoes라는 state 갯수만큼 돌려야하니까 shoes에 map을 붙였습니다)
+
+`map 반복문`이 기억이 안나면 이전 강의를 참고하도록 합니다.
+
+`map 반복문` 안엔 2개의 파라미터가 들어갈 수 있는데 (a, i 이렇게 써놓은거요)
+
+왼쪽거는 shoes라는 array에 있던 하나하나의 데이터를 의미하고,
+
+i는 반복문 돌면서 1씩 증가하는 정수입니다. 0,1,2 ... 이런 식으로 변하는 변수겠네요.
+
+**상품 이미지들 데이터바인딩하기**
+
+현재 모든 상품이미지들은 Card 컴포넌트 안에 **`<img src="~~~/shoes1.jpg">`** 이렇게 하드코딩되어있습니다.
+
+근데 각각 컴포넌트마다 **shoes1.jpg / shoes2.jpg / shoes3.jpg** 라는 데이터로 데이터바인딩하고 싶은데 어떻게 하면 될까요?
+
+힌트는.. 위에서 배웠던 교훈을 생각해보시면 됩니다.
+
+컴포넌트마다 각각 다른 내용을 보여주고 싶으면 props로 다른 정보를 전송해주면 된다고했죠?
+
+그럼 <img/> 경로에 "shoes1.jpg" 라고 하드코딩되어있던 걸 이렇게 바꾸면 되겠군요.
+
+```jsx
+<img src={ ~~~ shoes반복문돌때마다1,2,3으로변하는변수.jpg} />
+```
+
+이렇게요.
+
+**Q. 그런 변수가 있나요?**
+
+<Card> 근처에 있습니다. <Card> 반복문 돌릴 때 map 안에 i라는 변수가 있다고 했습니다. 0,1,2라고 변하는 변수였죠?
+
+비슷하니까 이걸 활용하면 되겠군요.
+
+```jsx
+<img src={ 'https://codingapple1.github.io/shop/shoes' + i + '.jpg' } width="100%"/>
+```
+
+▲ 그리고 글자 중간에 변수를 넣고 싶으면 이런 식으로 쓰면 되고요.
+
+근데 **i** 라는 변수는 App이라는 부모 컴포넌트가 가지고 있는 변수기 때문에
+
+**하위 컴포넌트에서 사용하고싶으면 이것도 똑같이 `props`로 전송해주어야 갖다쓸 수 있습니다**.(부모가 가지고 있는 state, 변수는 props로 전송해야함)
+
+전송해봅시다.
+
+```jsx
+function App(){
+
+  **let [shoes, shoes변경] = useState(Data);**
+  return (
+    <div className="App">
+      <Navbar></Navbar> (그 사이트에 있던 navbar 예제 어쩌구)
+      <Jumbotron></Jumbotron> (그 사이트에 있던 jumbotron 예제 어쩌구)
+
+      <div className="container">
+        <div className="row">
+          {
+            **shoes.map((a,i)=>{
+             return <Card shoes={shoes[i]} i={i} /> // i는 0,1,2,3, ...**
+            });
+          }
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Card(){
+  return (
+    <div className="col-md-4">
+      <img src={ 'https://codingapple1.github.io/shop/shoes' + (props.i+1) + '.jpg' } width="100%"/>
+      <h4>{ props.shoes.title }</h4>
+      <p>{ props.shoes.content } & { props.shoes.price }</p>
+    </div>
+  )
+}
+```
+
+▲ `props` 전송하시려면
+
+1. `i={i}` 이렇게 전송해주시고 2. `props.i` 이렇게 갖다쓴다고 배워봤습니다. (src=”” 에다가 데이터 바인딩하려면 `src {}` 이렇게 하면 변수명 함수명 넣기 가능)
+
+근데 i는 0,1,2가 된댔는데 우리가 필요한 숫자는 **1,2,3** 이잖아요
+
+그래서 `(props.i + 1)` 이런 변수를 집어넣은 것입니다.
+
+텍스트 중간에 변수를 넣고 싶으면 → `‘문자’ + 변수 + ‘문자’`
+
+**현강에서 많이 들어본 질문**
+
+**Q. 왜 이런 짓거리를 나에게 시키는 것이죠?**
+
+A. 요즘 프론트엔드 개발자의 주된 역할은
+
+1. 서버에서 데이터받아온 후 2. 그걸로 HTML을 예쁘게 만들어 보여주는 역할입니다.
+
+그걸 리액트로 연습하고 있는 것이고요.
+
+하지만 아직 서버에서 받아온 데이터가 없으니 data.js에 있는 데이터가지고 연습하고 있는 것일 뿐입니다.
+
+**Q. <Card> 이거 굳이 반복문 안돌려도 되지않을까요?**
+
+A. shoes라는 데이터가 항상 3개라면 굳이 반복문 안써도 됩니다.
+
+근데 **`shoes` 라는 데이터가 3개가 아니라 매번 달라지고 그렇다면** 반복문을 돌리는게 매우 좋습니다.
+
+반복문은 '데이터 갯수만큼' HTML을 보여줄 수 있으니까요.
+
+지금 강의에서도 shoes라는 데이터 갯수만큼 반복문을 돌리고 있습니다.
+
+**Q. 왜 터미널/콘솔창에 워닝이 뜨죠?**
+
+A. 워닝은 항상 메세지를 읽어보면 바로 해결책이 나오는데
+
+`map` 쓰셨다면 `key={}`이것도 꼭 사용해주셔야한다고 배웠었죠? 그래서 그럴겁니다.
+
+{} 여기 안에는 반복문이 돌면서 0,1,2가 되는 변수를 적어주시면 된다고 했고요.
+
+**그러니까 `<Card key={i}/>`** 이런 코드를 추가해주시면 되겠네요.
+
+## ****React Router 1 : 셋팅과 기본 라우팅 (페이지 나누기)****
+
+**(수정) 라이브러리 설치시 npm install react-router-dom@5.2.0 이걸로 설치합시다.**
+
+여러가지 페이지를 만들고 싶다면 라우터를 이용합니다.
+
+react-router-dom이라는 공식 라이브러리를 설치해서 이용하시면 됩니다.
+
+오늘은 메인페이지와 상세페이지 이렇게 두개의 페이지만 만들어볼겁니다.
+
+일단 설치와 셋팅부터 하도록 합시다.
+
+**설치/셋팅부터 합시다**
+
+터미널을 여시고
+
+```
+npm install react-router-dom@5.2.0
+```
+
+```
+yarn add react-router-dom@5.2.0
+```
+
+둘 중 하나 입력해서 설치해주시면 됩니다. yarn 으로 시작하는건 당연히 저번에 yarn을 설치해야 사용할 수 있습니다.
+
+그리고 index.js 파일에 방문합니다.
+
+이 파일은 **App.js에 있는 <App> 컴포넌트를 index.html에 꽂아주세요**~ 뭐 이런 작업을 시키는 파일이라고 보시면 됩니다.
+
+근데 여기다가 다음 코드들을 추가합니다.
+
+```jsx
+import 어쩌구 많은곳;
+
+import { **BrowserRouter** } from 'react-router-dom';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App/>
+    </BrowserRouter>
+  </React.StrictMode>document.getElementById('root')
+);
+
+```
+
+▲ 당연히 다 지우고 복붙하는게 아니라 기존코드와의 차이점만 잘 복붙하시길 바랍니다.
+
+BrowserRouter를 import 해오고 <BrowserRouter>라는 태그를 추가했습니다.
+
+그럼 이제 라우팅할 준비가 끝났습니다.
+
+근데 셋팅할 때 <BrowserRouter> 말고 <HashRouter> 라는 태그도 이용할 수 있습니다.
+
+사용방법은 위의 복붙했던 코드를 Browser라는 단어대신 전부 Hash라고 바꿔주시면 되는데
+
+이게 뭐냐면
+
+- **HashRoute**r를 복붙하시면 **사이트 방문시 URL 맨 뒤에 /#/이 붙은채로 시작**합니다.
+- BrowserRouter를 복붙하시면 사이트 방문시 # 그런거 없이 깔끔해집니다.
+
+이게 차이점입니다.
+
+**Q. URL이 #기호로 드러워지는 HashRouter를 왜쓰죠?**
+
+A. 원래는 브라우저 주소창에 뭔가 페이지를 입력하면 **서버에게 특정 페이지좀 보여달라는 요청이 됩니다.**
+
+근데 우리는 요청할 서버가 없고 그냥 **리액트가 라우팅을 담당**하고 있습니다.
+
+그래서 잘못하면 있지도 않은 페이지를 서버에 요청을 해서 404 Page Not Found 이런 에러도 뜨고 그럴 수 있습니다.
+
+**실수로 서버에게 요청하지 않게 하려면 안전하게 #을 붙여주어야합니다.**
+
+왜냐면 브라우저 주소창에서 # 뒤에 붙은 것들은 절대 서버로 요청되지 않으니까요.
+
+**Q. 그럼 BrowserRouter는 안좋은거네요?**
+
+A. 그건 아니고 BrowserRouter를 쓰시려면 그냥 서버에서 셋팅만 잘해주시면 됩니다.
+
+"이런 경로로 들어오는 요청은 404 보내지 말구요~ 전부 리액트가 라우팅하게 해주세요~"
+
+"이 경로로 들어오는 요청은 그냥 리액트 메인페이지로 보내주세요~"
+
+이런 식으로 API를 짜놓으면 됩니다. 물론 서버지식이 없다면 이건 몰라도됩니다.
+
+**라우팅을 해봅시다 (페이지나누기)**
+
+오늘의 목표는 이겁니다.
+
+**(1) / 여기로 접속하면 `메인페이지`를 보여주고 싶습니다.**
+
+**(2) /detail로 접속하면 `상세페이지`를 보여주고 싶습니다.**
+
+근데 이런거 하려면 일단 하는 법부터 알아봅시다.
+
+**라우팅하려면 1. 여러가지 태그들 import가 필요합니다.**
+
+```jsx
+ (App.js)
+
+import 많은 곳;
+import { Link, Route, Switch } from 'react-router-dom';
+
+function App(){
+  return (
+    <div>
+      HTML 잔뜩있는 곳
+
+    </div>
+  )
+}
+```
+
+▲ 상단에 Route 라는 태그를 import 해오십시오. Link, Switch는 다음시간에 쓸거라 미리 해놨습니다.
+
+**라우팅하려면 2. 원하는 곳에 <Route><Route/>태그를 작성합니다.**
+
+**라우팅하려면 3. <Route>안에 path와 path 방문시 보여줄 HTML 을 적으시면 됩니다.**
+
+```jsx
+ (App.js)
+
+import 많은 곳;
+import { Link, Route, Switch } from 'react-router-dom';
+
+function App(){
+  return (
+    <div>
+      HTML 잔뜩있는 곳
+      <Route path="/">
+        <div>메인페이지인데요</div>
+      </Route>
+      <Route path="/detail">
+        <div>상세페이지인데요</div>
+      </Route>
+    </div>
+  )
+}
+```
+
+▲ 그래서 이렇게 적었습니다.
+
+이제 브라우저 주소창에 입력해보십시오.
+
+/ 으로 접속하면 "메인페이지인데요~"
+
+/detail로 접속하면 "상세페이지인데요~" 가 보입니다.
+
+라우팅쉽습니다. 이게 끝입니다.
+
+이제 "메인페이지인데요~" 라는 div박스말고 메인페이지에 해당하는 HTML을 전부 담고 하시면 멋진 사이트가 완성되겠군요.
+
+참고로 이렇게도 작성가능합니다.
+
+```jsx
+<Route path="/어쩌구" component={Card} ></Route>
+```
+
+그러면 /어쩌구 라는 경로로 접속했을 때 Card 라는 컴포넌트를 이 자리에 보여줍니다.
+
+그러니 컴포넌트를 가지고 있으면 조금 더 간단하겠죠?
+
+```jsx
+<Route path="/어쩌구"> <Card/> </Route>
+```
+
+물론 이렇게 쓰는것도 똑같은 기능을 합니다. (더 쉬움)
+
+**`React-Router` 특징 :**
+
+- 각각 페이지마다 다른 HTML 파일을 보여주는게 아닙니다.
+
+HTML 내부의 내용을 갈아치워서 다른 페이지처럼 흉내내는 것일 뿐입니다.
+
+**나는 `/detail`로 접속했는데 왜 상세페이지, 메인페이지 둘다 보여주죠?**
+
+왜냐면 /detail이라고 적으면 /라는 경로도 포함되어있으니까요.
+
+그래서 **/ 경로로 접속했다고 생각하고 메인페이지**
+
+**/detail 경로도 접속했다고 생각하고 상세페이지 둘다 보여주는 것**입니다.
+
+(그냥 리액트 라우터는 원래 이렇게 동작합니다)
+
+그런게 싫으시면 / 경로에 `exact`라는 속성을 부여해주시면 됩니다.
+
+```jsx
+<Route **exact** path="/">
+  <div>메인페이지에요</div>
+</Route>
+```
+
+그럼 / 경로와 정확히 일치할 때만 메인페이지를 보여줍니다.
+
+**메인페이지/상세페이지 `Route`에 내용 채우기**
+
+지금은 / 경로 Route에선 "메인페이지에요~" 라는 임시 글자만 보여주고 있는데
+
+여기에 진짜로 메인페이지에 해당하는 HTML들을 옮겨보도록 합시다.
+
+<Navbar>은 모든페이지에 보여야하니 그대로 냅두고,
+
+`<Jumbotron>`이랑 카드3개 레이아웃을 메인페이지 Route에 잘라내기 붙여넣기 하시면 되겠군요.
+
+```jsx
+ (App.js)
+
+import 많은 곳;
+import { Link, Route, Switch } from 'react-router-dom';
+
+function App(){
+  return (
+    <div>
+      <Navbar></Navbar> (상단메뉴 레이아웃)
+
+      <Route path="/">
+        <Jumbotron></Jumbotron> (Jumbotron 대문 레이아웃)
+        <>상품3개 카드 레이아웃</>
+      </Route><Route path="/detail">
+        <div>상세페이지인데요</div>
+      </Route>
+    </div>
+  )
+}
+```
+
+▲ 그래서 전 이렇게 구성해봤습니다. 여러분 맘대로 하시면 됩니다.
+
+그리고 상세페이지에 들어갈 레이아웃은 제가 마련해봤습니다.
+
+![스크린샷 2022-03-21 오후 8.04.33.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ce427ce6-200c-4f99-b36e-7042fec37ffe/스크린샷_2022-03-21_오후_8.04.33.png)
+
+▼ 이것을 상세페이지로 사용하십시오. /detail로 접속하면 이게 보여야합니다.
+
+```jsx
+<div className="container">
+      <div className="row">
+        <div className="col-md-6">
+          <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+        </div>
+        <div className="col-md-6 mt-4">
+          <h4 className="pt-5">상품명</h4>
+          <p>상품설명</p>
+          <p>120000원</p>
+          <button className="btn btn-danger">주문하기</button>
+        </div>
+      </div>
+</div>
+```
+
+## ****React Router 2 : Link, Switch, history 기능****
+
+라우터의 Link 태그, Switch 태그, history의 역할에 대해 알아봅시다.
+
+그리고 그 전에 Detail 페이지에 있던 내용을 Component로 만들어봅시다.
+
+근데 App.js 내용이 너무 길어질까봐 다른 파일에 Detail 컴포넌트를 저장해놓고 App.js 까지 import 해오도록 합시다.
+
+**일단 상세페이지 내용을 담을 <Detail> 컴포넌트를 만들자**
+
+저번시간 /detail 방문시 보여지는 HTML 내용을 길게 복붙한적이 있을겁니다.
+
+그게 너무 길어서 컴포넌트화를 해보도록 합시다. 컴포넌트 이름은 <Detail/> 이라고 합시다.
+
+근데 컴포넌트를 App.js에 만들지 말고 다른 파일에 저장해둔 뒤 App.js까지 import 해오는 방법을 사용합시다.
+
+```jsx
+(Detail.js 파일)
+
+import React from 'react';
+
+function Detail(){
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-md-6">
+          <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+        </div>
+        <div className="col-md-6 mt-4">
+          <h4 className="pt-5">상품명</h4>
+          <p>상품설명</p>
+          <p>120000원</p>
+          <button className="btn btn-danger">주문하기</button>
+        </div>
+      </div>
+  </div>
+  )
+};
+
+export default Detail
+```
+
+▲ 그래서 1. src 폴더 내에 Detail.js 파일을 만들고
+
+2. 컴포넌트 생성하는 코드를 담았습니다. 근데 이거 쓰시려면 맨 위에 항상 import React를 해오셔야합니다.
+
+3. 맨 마지막줄에 Detail 이라는 함수를 export 해주었습니다.
+
+```jsx
+(App.js 파일)
+
+import 많은 곳;
+import Detail from './Detail.js';
+function App(){
+  return (
+    <div>
+      <Navbar></Navbar> (상단메뉴 레이아웃)
+
+      <Route path="/">
+        <Jumbotron></Jumbotron> (Jumbotron 대문 레이아웃)
+        <>상품3개 카드 레이아웃</>
+      </Route><Route path="/detail">
+        <Detail/>
+      </Route>
+    </div>
+  )
+}
+```
+
+▲ 그럼 이제 다른 파일에서 자유롭게 Detail 컴포넌트를 가져다쓸 수 있습니다.
+
+위는 App.js 에서 이 파일을 가져와서 컴포넌트를 자유롭게 활용해본 예제입니다.
+
+이제 배웠으니 컴포넌트가 길어지면 얼마든지 다른 파일로 빼서 저장해두십시오.
+
+(import/export 문법이랑 import React 이것만 잘 기억하시면 됩니다.)
+
+**Link 태그로 페이지 이동버튼 만들기**
+
+메인페이지, 상세페이지 이동버튼을 만들어봅시다.
+
+페이지 상단 메뉴에 만들면 좋을 것 같아서 상단메뉴(Navbar)를 찾아갑니다.
+
+```jsx
+(App.js 파일)
+
+function App(){
+  return (
+    <div>
+      <Navbar>
+         <Nav.Link> <Link>Home</Link> </Nav.Link>
+         <Nav.Link> <Link>Detail</Link> </Nav.Link>
+      </Navbar>
+      <나머지HTML/>
+    </div>
+  )
+}
+```
+
+▲ Navbar 컴포넌트 안에 Nav.Link 라는 컴포넌트에 여러가지 버튼들이 있습니다.
+
+페이지 이동버튼으로 바꾸길 원하는 글자들에 <Link> 태그를 감싸보시길 바랍니다.
+
+(Link 태그는 이전 시간에 'react-router-dom'과 함께 상단에 import 해온 컴포넌트입니다)
+
+```jsx
+(App.js 파일)
+
+function App(){
+  return (
+    <div>
+      <Navbar>
+         <Nav.Link> <Link to="/">Home</Link> </Nav.Link>
+         <Nav.Link> <Link to="/detail">Detail</Link> </Nav.Link>
+      </Navbar>
+      <나머지HTML/>
+    </div>
+  )
+}
+```
+
+▲ 그 다음에 to 라는 속성을 이용해서 경로를 적어주시면 페이지 이동버튼이 완성됩니다.
+
+- Link 태그를 사용하고
+- to 속성을 이용해 경로만 지정해주면 됩니다.
+
+어찌보면 <a> 태그 만드는 것과 매우 유사합니다.
+
+그럼 Detail이라는 글자를 누르면 /detail 경로
+
+Home이라는 글자를 누르면 / 경로로 이동합니다.
+
+**다른 방법으로 페이지 이동기능 만들기**
+
+<Link> 꼭 이런 버튼 말고도
+
+코드 실행 중간중간에 페이지를 이동시키고 싶은 경우도 많습니다.
+
+그럴 경우엔 페이지 이동 함수를 사용하시면 됩니다.
+
+예시를 위해 Detail 페이지(컴포넌트)에 뒤로가기 버튼을 하나 만들어봅시다.
+
+그런거 만들고 싶으시면 useHistory() 라는 함수를 하나 import 해오시면 됩니다.
+
+```jsx
+(Detail.js 파일)
+
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+
+function Detail(){
+
+  let history = useHistory();
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-md-6">
+          <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+        </div>
+        <div className="col-md-6 mt-4">
+          <h4 className="pt-5">상품명</h4>
+          <p>상품설명</p>
+          <p>120000원</p>
+          <button className="btn btn-danger">주문하기</button>
+          <button className="btn btn-danger">뒤로가기</button>
+        </div>
+      </div>
+  </div>
+  )
+};
+
+export default Detail
+```
+
+▲ 1. import 를 저렇게 해오시고 2. let history 라는 변수에 그 함수를 저장하시면 됩니다.
+
+useHistory()는 여러분의 코딩생활을 편하게 해주는 일종의 Hook입니다. (useState 이런거랑 비슷한겁니다)
+
+그럼 이제 history 라는 변수엔 큰 object {} 자료가 하나 저장이 되어있습니다.
+
+그 object 안에는 페이지 이동 내역 + 유용한 함수가 저장되어있습니다.
+
+```jsx
+(Detail.js 파일)
+
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+
+function Detail(){
+
+  let history = useHistory();
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-md-6">
+          <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+        </div>
+        <div className="col-md-6 mt-4">
+          <h4 className="pt-5">상품명</h4>
+          <p>상품설명</p>
+          <p>120000원</p>
+          <button className="btn btn-danger">주문하기</button>
+          <button onClick={()=>{ history.goBack() }} className="btn btn-danger">뒤로가기</button>
+        </div>
+      </div>
+  </div>
+  )
+};
+
+export default Detail
+```
+
+history에 저장된 여러 자료들 중 가장 유용한건 goBack()이라는 함수입니다.
+
+이 함수를 실행하면 페이지가 뒤로갑니다.
+
+▲ 그래서 뒤로가기 버튼을 눌렀을 때 goBack() 함수를 실행하도록 코드를 짜본겁니다.
+
+그럼 이제 뒤로 잘 가죠?
+
+**Q. 이런걸 어케알고 코드를 짜는거죠?**
+
+A. 이런 라이브러리 사용법은 찾아서 읽거나 검색해봐야 알 수 있습니다. 저도 찾아본거임
+
+그럼 커스텀 페이지로 이동하는 기능을 만들고 싶으면
+
+라이브러리 사용법에 따라 push() 함수를 꺼내쓰시면 됩니다.
+
+```jsx
+(Detail.js 파일)
+
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+
+function Detail(){
+
+  let history = useHistory();
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-md-6">
+          <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+        </div>
+        <div className="col-md-6 mt-4">
+          <h4 className="pt-5">상품명</h4>
+          <p>상품설명</p>
+          <p>120000원</p>
+          <button className="btn btn-danger">주문하기</button>
+          <button onClick={()=>{ history.push('/') }} className="btn btn-danger">뒤로가기</button>
+        </div>
+      </div>
+  </div>
+  )
+};
+
+export default Detail
+```
+
+▲ push() 라는 함수를 쓰시고 안에 경로를 입력하시면 그 경로로 이동합니다.
+
+이런 기능도 유용하겠죠?
+
+**Switch 컴포넌트에 대해 알아보자**
+
+맨 처음 라우터 import 어쩌구 해왔을 때 { Link, Router, Switch } 이렇게 3개의 컴포넌트를 import 해왔었습니다.
+
+그 중 <Switch> 라는건
+
+**매치되는 <Route> 들을 전부 보여주지 말고 한번에 하나만 보여주세요~** 기능을 만들고 싶을 때 씁니다.
+
+예를 들기 위해 이거 하나만 따라적어봅시다.
+
+```jsx
+(App.js 파일)
+
+function App(){
+  return (
+    <div>
+      <나머지HTML/>
+      <Route exact path="/">
+        어쩌구
+      </Route><Route path="/detail">
+        <Detail/>
+      </Route><Route path="/:id">
+        <div>새로 만든 route입니다</div>
+      </Route>
+    </div>
+  )
+}
+```
+
+▲ 기존 <Route> 들 있던 곳에 새로운 <Route> 하나만 맨 밑에 하나 추가했습니다.
+
+새로운 Route는 path를 /:id 라고 적었는데, 이게 뭐냐면 URL 파라미터라는 문법인데
+
+그냥 / 슬래시 뒤에 모든 문자가 오면 이 Route로 안내해주세요~를 뜻합니다. (다음 시간에 배울 예정)
+
+암튼 아무 문자나 넣어도 이 경로로 이동을 시켜주라고 코드를 짜놓았습니다.
+
+**Q. 그럼 /detail로 이동하면 어떤게 보이죠?**
+
+**A. (1)** **<Detail> (2) <div>새로 만든 route입니다</div>** 이거 둘다 보여줍니다.
+
+(왜냐면 리액트 라우터는 그냥 URL 매치되는 것들 전부 다 보여준다니깐요)
+
+이런걸 방지하고 싶다, 그냥 한번에 하나의 <Route>만 보여주고 싶다 그러면
+
+<Route>들을 위에서 import 해온 <Switch> 태그로 감싸면 됩니다.
+
+```jsx
+(App.js 파일)
+
+function App(){
+  return (
+    <div>
+      <나머지HTML/>
+      <Switch>
+        <Route exact path="/">
+          어쩌구
+        </Route>
+        <Route path="/detail">
+          <Detail/>
+        </Route>
+        <Route path="/:id">
+          <div>새로 만든 route입니다</div>
+        </Route>
+      </Switch>
+    </div>
+  )
+}
+```
+
+▲ 다 감싸면 이제 여러개의 Route가 매칭이 되어도 **맨 위의 Route 하나만** 보여줍니다.
+
+이걸 응용하시면 이전시간에 겪었던 / 경로 문제도 exact 쓰지않고 해결할 수 있습니다.
+
+답은 안알랴줌이니까 잘 생각해보십시오.
