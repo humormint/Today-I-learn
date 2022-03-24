@@ -54,11 +54,11 @@ a.txt, b.txt, c.txt 파일이 untracked된 채로 남아 있음, commit은 아�
 
 → `git add`를 통해 staging area로 옮길 수 있음
 
-![스크린샷 2021-12-29 오후 1.22.29.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7054a6d6-4c51-419e-a864-ca3ea6dda4b6/스크린샷_2021-12-29_오후_1.22.29.png)
+![스크린샷 2021-12-29 오후 1.22.29.png](./img/스크린샷_2021-12-29_오후_1.22.29.png)
 
 a텍스트 파일은 커밋할 준비하 완료됨, b와 c는 아직 untracked
 
-![스크린샷 2021-12-29 오후 1.25.20.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/03f861f3-2970-4a7d-94b9-96f5147b691e/스크린샷_2021-12-29_오후_1.25.20.png)
+![스크린샷 2021-12-29 오후 1.25.20.png](./img/스크린샷_2021-12-29_오후_1.25.20.png)
 
 `git add *.txt` → 모든 txt파일 staging area로 보내기
 
